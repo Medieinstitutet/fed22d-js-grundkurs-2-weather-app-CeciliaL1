@@ -14,28 +14,35 @@ export const currentWind = document.querySelector('#currentWind') as HTMLElement
 export const currentPrecipitation = document.querySelector('#currentPrecipitation') as HTMLElement;
 export const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
 
-const cityMBtn = document.querySelector('#cityM') as HTMLButtonElement;
-const cityGBtn = document.querySelector('#cityG') as HTMLButtonElement;
-const citySBtn = document.querySelector('#cityS') as HTMLButtonElement;
+const cityBtn = document.querySelectorAll('.cityBtn');
 
+/*
 // Variables for when fetching from local object
 station.innerHTML += `Vädret från stationen ${dataCurrentTemp.station.name} <br>`;
 currentDate.innerHTML += `${convertDate(dataCurrentTemp.value[0].date)} <br>`;
 currentTemp.innerHTML += ` ${dataCurrentTemp.value[0].value} grader`
+*/
 
  /**
  * FUNCTIONS
  */
 
- function cityMfunction(){
-    console.log('malmö');
+ function cityfunction(event: any){
+    const index = event.currentTarget.dataset.id;
+   
+    const stationName = dataCurrentTemp.station.name;
+    const _stationName = stationName.replace(' A', '').toLowerCase();
+
+    if (_stationName === index){
+        station.innerHTML = `Vädret från stationen ${dataCurrentTemp.station.name} <br>`;
+        currentDate.innerHTML = `${convertDate(dataCurrentTemp.value[0].date)} <br>`;
+        currentTemp.innerHTML = ` ${dataCurrentTemp.value[0].value} grader`
+    }
+    else if (_stationName === index){
+        console.log('gbg');
+    }
  }
- function cityGfunction(){
-    console.log('gbg');
- }
- function citySfunction(){
-    console.log('sth');
- }
+
 // Function call for when fetching from open API
 // dataCurrentTemp;
 
@@ -43,6 +50,7 @@ currentTemp.innerHTML += ` ${dataCurrentTemp.value[0].value} grader`
  * LOGIC
  */
 
-cityMBtn.addEventListener('click', cityMfunction);
-cityGBtn.addEventListener('click', cityGfunction);
-citySBtn.addEventListener('click', citySfunction);
+cityBtn.forEach((btn) => {
+    btn.addEventListener('click', cityfunction);
+})
+    
