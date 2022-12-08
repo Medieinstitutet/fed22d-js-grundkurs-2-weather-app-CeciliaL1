@@ -46,17 +46,18 @@ const cityBtn = document.querySelectorAll('.cityBtn');
     console.log(index)
 
     if (index === 'malmö'){
-        const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/52350/period/latest-hour/data.json';
+        const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/52350/period/latest-day/data.json';
         fetch(url)
           .then((res) => {
             console.log(res);
             return res.json();
           })
           .then((json) => {
-            station.innerHTML = `Vädret från stationen ${json.station.name} <br>`;
-            currentDate.innerHTML = `${convertDate(json.value[0].date)} <br>`;
-            currentTemp.innerHTML = ` ${json.value[0].value} grader`
+            station.innerHTML = `${json.parameter.name} från stationen ${json.station.name.replace(' A', ' ')} <br>`;
+            for (let i = 20; i < 25; i++){
+            currentDate.innerHTML += `${convertDate(json.value[i].date).replace(/Thu,|2022|GMT|/g,  '',)} ${json.value[i].value} grader. <br>`;
             console.log(json);
+            }
           })
           .catch((err) => {
             console.error(err);
