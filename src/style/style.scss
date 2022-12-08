@@ -11,4 +11,26 @@ main{
   min-height: 100vh;
   background-image: url('sun-bg.jpg');
   background-position: 50%;
+
+  section{
+  margin: auto;
+  width: 70%;
+  text-align: center;
+  padding-top: 40px;
+
+  button{
+    margin-top: 40px;
+    cursor: pointer;
+    width: 80px;
+  }
+  }
+
+  .tempinfo{
+    width: 100%;
+    height: auto;
+    background-color: rgba($color: #fff, $alpha: 70%)
+
+  /* visibility: hidden; */
+
+  }
 }
