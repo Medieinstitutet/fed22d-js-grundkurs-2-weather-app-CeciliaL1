@@ -1,5 +1,5 @@
 import './style/style.scss';
-import dataCurrentTemp from './currentTemp'
+//import dataCurrentTemp from './currentTemp'  For when fetcing from local object
 import convertDate from './convertdate';
 
 
@@ -16,19 +16,13 @@ export const currentMoist = document.querySelector('#currentMoist') as HTMLEleme
 
 const cityBtn = document.querySelectorAll('.cityBtn');
 
-/*
-// Variables for when fetching from local object
-station.innerHTML += `Vädret från stationen ${dataCurrentTemp.station.name} <br>`;
-currentDate.innerHTML += `${convertDate(dataCurrentTemp.value[0].date)} <br>`;
-currentTemp.innerHTML += ` ${dataCurrentTemp.value[0].value} grader`
-*/
-
  /**
  * FUNCTIONS
  */
-
+/*
  function cityfunction(event: any){
     const index = event.currentTarget.dataset.id;
+    console.log(index)
    
     const stationName = dataCurrentTemp.station.name;
     const _stationName = stationName.replace(' A', '').toLowerCase();
@@ -42,9 +36,72 @@ currentTemp.innerHTML += ` ${dataCurrentTemp.value[0].value} grader`
         console.log('gbg');
     }
  }
-
+*/
 // Function call for when fetching from open API
-// dataCurrentTemp;
+ 
+ function cityfunction(event: any){
+    
+    const index = event.currentTarget.dataset.id;
+    console.log(index)
+   
+     // for When fetching from local object
+    //const stationName = dataCurrentTemp.station.name;
+    //const _stationName = stationName.replace(' A', '').toLowerCase();
+
+    if (index === 'malmö'){
+        const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/52350/period/latest-hour/data.json';
+        fetch(url)
+          .then((res) => {
+            console.log(res);
+            return res.json();
+          })
+          .then((json) => {
+            station.innerHTML = `Vädret från stationen ${json.station.name} <br>`;
+            currentDate.innerHTML = `${convertDate(json.value[0].date)} <br>`;
+            currentTemp.innerHTML = ` ${json.value[0].value} grader`
+            console.log(json);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+
+        
+    }
+   else if (index === 'göteborg'){
+    const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/71420/period/latest-hour/data.json';
+    fetch(url)
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((json) => {
+        station.innerHTML = `Vädret från stationen ${json.station.name} <br>`;
+        currentDate.innerHTML = `${convertDate(json.value[0].date)} <br>`;
+        currentTemp.innerHTML = ` ${json.value[0].value} grader`
+        console.log(json);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    }
+    else if ( index === 'stockholm'){
+        const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97400/period/latest-hour/data.json';
+    fetch(url)
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((json) => {
+        station.innerHTML = `Vädret från stationen ${json.station.name} <br>`;
+        currentDate.innerHTML = `${convertDate(json.value[0].date)} <br>`;
+        currentTemp.innerHTML = ` ${json.value[0].value} grader`
+        console.log(json);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    }
+ }
 
 /**
  * LOGIC
