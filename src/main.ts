@@ -66,34 +66,36 @@ const cityBtn = document.querySelectorAll('.cityBtn');
         
     }
    else if (index === 'göteborg'){
-    const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/71420/period/latest-hour/data.json';
+    currentDate.innerHTML = '';
+    const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/71420/period/latest-day/data.json';
     fetch(url)
       .then((res) => {
         console.log(res);
         return res.json();
       })
       .then((json) => {
-        station.innerHTML = `Vädret från stationen ${json.station.name} <br>`;
-        currentDate.innerHTML = `${convertDate(json.value[0].date)} <br>`;
-        currentTemp.innerHTML = ` ${json.value[0].value} grader`
-        console.log(json);
+        station.innerHTML = `${json.parameter.name} från stationen ${json.station.name.replace(' A', ' ')} <br>`;
+        for (let i = 20; i < 25; i++){
+        currentDate.innerHTML += `${convertDate(json.value[i].date).replace(/Thu,|2022|GMT|/g,  '',)} ${json.value[i].value} grader. <br>`;
+        }
       })
       .catch((err) => {
         console.error(err);
       });
     }
     else if ( index === 'stockholm'){
-        const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97400/period/latest-hour/data.json';
+      currentDate.innerHTML = ' ';
+        const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97400/period/latest-day/data.json';
     fetch(url)
       .then((res) => {
         console.log(res);
         return res.json();
       })
       .then((json) => {
-        station.innerHTML = `Vädret från stationen ${json.station.name} <br>`;
-        currentDate.innerHTML = `${convertDate(json.value[0].date)} <br>`;
-        currentTemp.innerHTML = ` ${json.value[0].value} grader`
-        console.log(json);
+        station.innerHTML = `${json.parameter.name} från stationen ${json.station.name} <br>`;
+        for (let i = 20; i < 25; i++){
+        currentDate.innerHTML += `${convertDate(json.value[i].date).replace(/Thu,|2022|GMT|/g,  '',)} ${json.value[i].value} grader. <br>`;
+        }
       })
       .catch((err) => {
         console.error(err);
