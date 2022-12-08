@@ -2,14 +2,45 @@
 <html lang="sv">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/ico" href="/js-template/favicon.ico" />
+    <link rel="icon" type="image/ico" href="/fed22d-js-grundkurs-2-weather-app-CeciliaL1/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Väder App</title>
-    <script type="module" crossorigin src="/js-template/assets/index.74d163d3.js"></script>
-    <link rel="stylesheet" href="/js-template/assets/index.09951560.css">
+    <script type="module" crossorigin src="/fed22d-js-grundkurs-2-weather-app-CeciliaL1/assets/index.14e5d938.js"></script>
+    <link rel="stylesheet" href="/fed22d-js-grundkurs-2-weather-app-CeciliaL1/assets/index.e7211984.css">
   </head>
   <body>
   
+    <main>
+
+      <section>
+        <h1>Väderapp</h1>
+        <button class="cityBtn" data-id="malmö">Malmö</button>
+        <button class="cityBtn" data-id="göteborg">Göteborg</button>
+        <button class="cityBtn" data-id="stockholm">Stockholm</button>
+      </section>
+      
+      <section class="tempinfo">
+        <h2 id="station"></h2>
+        <div>
+          <div >
+            <p id="currentDate"></p>
+            <p id="currentTemp"></p>
+            <p id="currentWind"></p>
+            <p id="currentPrecipitation"></p>
+            <p id="currentMoist"></p>
+          </div>
+
+          <div>
+            <p id="latestDate"></p>
+            <p id="latestTemp"></p>
+            <p id="latestWind"></p>
+            <p id="latestPrecipitation"></p>
+            <p id="latestMoist"></p>
+          </div>
+        </div>
+    </section>
+  
+  </main>
 
     <!-- TODO
     - Validera HTML (kopiera den renderade HTML-koden): https://validator.w3.org/#validate_by_input
