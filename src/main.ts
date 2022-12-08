@@ -1,5 +1,5 @@
 import './style/style.scss';
-//import dataCurrentTemp from './currentTemp'  For when fetcing from local object
+// import dataCurrentTemp from './currentTemp'  // for when fetching from local object
 import convertDate from './convertdate';
 
 
@@ -20,6 +20,7 @@ const cityBtn = document.querySelectorAll('.cityBtn');
  * FUNCTIONS
  */
 /*
+// For when fetching from local object
  function cityfunction(event: any){
     const index = event.currentTarget.dataset.id;
     console.log(index)
@@ -43,10 +44,6 @@ const cityBtn = document.querySelectorAll('.cityBtn');
     
     const index = event.currentTarget.dataset.id;
     console.log(index)
-   
-     // for When fetching from local object
-    //const stationName = dataCurrentTemp.station.name;
-    //const _stationName = stationName.replace(' A', '').toLowerCase();
 
     if (index === 'malmö'){
         const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/52350/period/latest-hour/data.json';
