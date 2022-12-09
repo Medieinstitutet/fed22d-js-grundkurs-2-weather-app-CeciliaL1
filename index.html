@@ -5,8 +5,8 @@
     <link rel="icon" type="image/ico" href="/fed22d-js-grundkurs-2-weather-app-CeciliaL1/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Väder App</title>
-    <script type="module" crossorigin src="/fed22d-js-grundkurs-2-weather-app-CeciliaL1/assets/index.79f2ccc4.js"></script>
-    <link rel="stylesheet" href="/fed22d-js-grundkurs-2-weather-app-CeciliaL1/assets/index.e7211984.css">
+    <script type="module" crossorigin src="/fed22d-js-grundkurs-2-weather-app-CeciliaL1/assets/index.7bfaf524.js"></script>
+    <link rel="stylesheet" href="/fed22d-js-grundkurs-2-weather-app-CeciliaL1/assets/index.903617c3.css">
   </head>
   <body>
   
@@ -19,17 +19,25 @@
         <button class="cityBtn" data-id="stockholm">Stockholm</button>
       </section>
       
-      <section class="tempinfo">
+      <section class="tempinfo" id="tempInfo">
         <h2 id="station"></h2>
-        <div>
-          <div >
-            <p id="currentDate"></p>
-            <p id="currentTemp"></p>
-            <p id="currentWind"></p>
+        <span id="currentDate"></span>
+        <div class="headings">
+          <h3>Tid</h3>
+          <h3>Temperatur</h3>
+          <h3>Vind</h3>
+          <h3>Regn</h3>
+          <h3>Luftfuktighet</h3>
+        </div>
+        <div class="tempvalues">
+            <span id="currentTime"></span>
+            <span id="currentTemp"></span>
+            
+            <!--<p id="currentWind"></p>
             <p id="currentPrecipitation"></p>
-            <p id="currentMoist"></p>
-          </div>
+            <p id="currentMoist"></p>-->
 
+          <!--
           <div>
             <p id="latestDate"></p>
             <p id="latestTemp"></p>
@@ -37,6 +45,7 @@
             <p id="latestPrecipitation"></p>
             <p id="latestMoist"></p>
           </div>
+        -->
         </div>
     </section>
   
