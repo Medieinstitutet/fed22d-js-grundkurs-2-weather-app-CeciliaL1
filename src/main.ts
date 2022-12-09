@@ -1,4 +1,7 @@
 import './style/style.scss';
+/**
+ * IMPORT FOR WHEN USING LOCAL OBJECTS
+ */
 // import dataCurrentTempMalmo from './currentTempMalmo' 
 // import dataCurrentTempGbg from './currentTempGbg'
 // import dataCurrentTempSth from './currentTempSth' // for when fetching from local object
@@ -8,6 +11,8 @@ import convertTime from './convertTime';
 /**
  * DECLARE VARIABLES
  */
+const cityBtn = document.querySelectorAll('.cityBtn');
+const tempInfoDiv = document.querySelector('#tempInfo') as HTMLDivElement;
 const station = document.querySelector('#station') as HTMLElement;
 const currentDate = document.querySelector('#currentDate') as HTMLElement;
 const currentTime = document.querySelector('#currentTime') as HTMLElement;
@@ -18,9 +23,7 @@ export const currentWind = document.querySelector('#currentWind') as HTMLElement
 export const currentPrecipitation = document.querySelector('#currentPrecipitation') as HTMLElement;
 export const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
 */
-const cityBtn = document.querySelectorAll('.cityBtn');
 
-const tempInfoDiv = document.querySelector('#tempInfo') as HTMLDivElement;
 
 
  /*********************************************************
@@ -28,8 +31,13 @@ const tempInfoDiv = document.querySelector('#tempInfo') as HTMLDivElement;
  * **********************************************************
  */
 
+
+ /*****************************************************
+  * For when fetching from local object
+  * ****************************************************
+  */
 /*
-// For when fetching from local object
+
  function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
     const index = event.currentTarget.dataset.id;
@@ -77,8 +85,6 @@ const tempInfoDiv = document.querySelector('#tempInfo') as HTMLDivElement;
       }
  }
 }
-
-
 */
 
 
