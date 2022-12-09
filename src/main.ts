@@ -1,51 +1,100 @@
 import './style/style.scss';
-// import dataCurrentTemp from './currentTemp'  // for when fetching from local object
+// import dataCurrentTempMalmo from './currentTempMalmo' 
+// import dataCurrentTempGbg from './currentTempGbg'
+// import dataCurrentTempSth from './currentTempSth' // for when fetching from local object
 import convertDate from './convertdate';
-
+import convertTime from './convertTime';
 
 /**
  * DECLARE VARIABLES
  */
-export const station = document.querySelector('#station') as HTMLElement;
-export const currentDate = document.querySelector('#currentDate') as HTMLElement;
-export const currentTemp = document.querySelector('#currentTemp') as HTMLElement;
+const station = document.querySelector('#station') as HTMLElement;
+const currentDate = document.querySelector('#currentDate') as HTMLElement;
+const currentTime = document.querySelector('#currentTime') as HTMLElement;
+const currentTemp = document.querySelector('#currentTemp') as HTMLElement;
 
+/*
 export const currentWind = document.querySelector('#currentWind') as HTMLElement;
 export const currentPrecipitation = document.querySelector('#currentPrecipitation') as HTMLElement;
 export const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
-
+*/
 const cityBtn = document.querySelectorAll('.cityBtn');
 
- /**
+const tempInfoDiv = document.querySelector('#tempInfo') as HTMLDivElement;
+
+
+ /*********************************************************
  * FUNCTIONS
+ * **********************************************************
  */
+
 /*
 // For when fetching from local object
  function cityfunction(event: any){
+  tempInfoDiv.classList.add('tempinfook');
     const index = event.currentTarget.dataset.id;
-    console.log(index)
    
-    const stationName = dataCurrentTemp.station.name;
-    const _stationName = stationName.replace(' A', '').toLowerCase();
+    const stationNameMalmo = dataCurrentTempMalmo.station.name;
+    const _stationNameMalmo = stationNameMalmo.replace(' A', '').toLowerCase();
 
-    if (_stationName === index){
-        station.innerHTML = `Vädret från stationen ${dataCurrentTemp.station.name} <br>`;
-        currentDate.innerHTML = `${convertDate(dataCurrentTemp.value[0].date)} <br>`;
-        currentTemp.innerHTML = ` ${dataCurrentTemp.value[0].value} grader`
+    const stationNameGbg = dataCurrentTempGbg.station.name;
+    const _stationNameGbg = stationNameGbg.replace(' A', '').toLowerCase();
+
+    const stationNameSth = dataCurrentTempSth.station.name;
+    const _stationNameSth = stationNameSth.replace('-Arlanda Flygplats', '').toLowerCase();
+
+    if (_stationNameMalmo === index){
+      currentDate.innerHTML = '';
+      currentTime.innerHTML = '';
+      currentTemp.innerHTML = '';
+        station.innerHTML = `Vädret i ${stationNameMalmo.replace(' A', ' ')} <br>`;
+        currentDate.innerHTML += `${convertDate(dataCurrentTempMalmo.value[0].date)}<br>`;
+      for (let i = 20; i < 25; i++){
+        currentTime.innerHTML += `${convertTime(dataCurrentTempMalmo.value[i].date)}<br> `;
+        currentTemp.innerHTML += ` ${dataCurrentTempMalmo.value[i].value} &#8451<br>`
+        }
     }
-    else if (_stationName === index){
-        console.log('gbg');
-    }
+    else if (_stationNameGbg === index){
+      currentDate.innerHTML = '';
+      currentTime.innerHTML = '';
+      currentTemp.innerHTML = '';
+      station.innerHTML = `Vädret i ${stationNameGbg.replace(' A', ' ')} <br>`;
+      for (let i = 20; i < 25; i++){
+        currentDate.innerHTML += `${convertDate(dataCurrentTempGbg.value[i].date)}<br>`;
+        currentTime.innerHTML += `${convertTime(dataCurrentTempGbg.value[i].date)}<br> `;
+        currentTemp.innerHTML += ` ${dataCurrentTempGbg.value[i].value} &#8451<br>`
+      }
+  }
+    else if (_stationNameSth === index){
+      currentDate.innerHTML = '';
+      currentTemp.innerHTML = '';
+      currentTime.innerHTML = '';
+      station.innerHTML = `Vädret i ${stationNameSth.replace('-Arlanda Flygplats', '')} <br>`;
+      for (let i = 20; i < 25; i++){
+        currentDate.innerHTML += `${convertDate(dataCurrentTempSth.value[i].date)}<br>  `;
+        currentTime.innerHTML += `${convertTime(dataCurrentTempSth.value[i].date)}<br> `;
+        currentTemp.innerHTML += ` ${dataCurrentTempSth.value[i].value} &#8451<br>`
+      }
  }
+}
+
+
 */
-// Function call for when fetching from open API
+
+
+/***********************************************
+ * REAL FETCH FROM API 
+ * ***********************************************
+ */
+
  
  function cityfunction(event: any){
+  tempInfoDiv.classList.add('tempinfook');
     
     const index = event.currentTarget.dataset.id;
-    console.log(index)
 
     if (index === 'malmö'){
+       currentDate.innerHTML = '';
         const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/52350/period/latest-day/data.json';
         fetch(url)
           .then((res) => {
@@ -53,10 +102,15 @@ const cityBtn = document.querySelectorAll('.cityBtn');
             return res.json();
           })
           .then((json) => {
-            station.innerHTML = `${json.parameter.name} från stationen ${json.station.name.replace(' A', ' ')} <br>`;
+            currentDate.innerHTML = '';
+            currentTime.innerHTML = '';
+            currentTemp.innerHTML = '';
+            station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
+            currentDate.innerHTML += `${convertDate(json.value[0].date)}<br>`;
+
             for (let i = 20; i < 25; i++){
-            currentDate.innerHTML += `${convertDate(json.value[i].date).replace(/Thu,|2022|GMT|/g,  '',)} ${json.value[i].value} grader. <br>`;
-            console.log(json);
+              currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
+              currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`
             }
           })
           .catch((err) => {
@@ -74,10 +128,16 @@ const cityBtn = document.querySelectorAll('.cityBtn');
         return res.json();
       })
       .then((json) => {
-        station.innerHTML = `${json.parameter.name} från stationen ${json.station.name.replace(' A', ' ')} <br>`;
-        for (let i = 20; i < 25; i++){
-        currentDate.innerHTML += `${convertDate(json.value[i].date).replace(/Thu,|2022|GMT|/g,  '',)} ${json.value[i].value} grader. <br>`;
-        }
+        currentDate.innerHTML = '';
+        currentTime.innerHTML = '';
+        currentTemp.innerHTML = '';
+        station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
+        currentDate.innerHTML += `${convertDate(json.value[0].date)}<br>`;
+
+         for (let i = 20; i < 25; i++){
+            currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
+            currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`
+      }
       })
       .catch((err) => {
         console.error(err);
@@ -92,9 +152,15 @@ const cityBtn = document.querySelectorAll('.cityBtn');
         return res.json();
       })
       .then((json) => {
-        station.innerHTML = `${json.parameter.name} från stationen ${json.station.name} <br>`;
+        currentDate.innerHTML = '';
+        currentTemp.innerHTML = '';
+        currentTime.innerHTML = '';
+        station.innerHTML = `Vädret i ${json.station.name.replace('-Arlanda Flygplats', '')} <br>`;
+        currentDate.innerHTML += `${convertDate(json.value[0].date)}<br>  `;
+
         for (let i = 20; i < 25; i++){
-        currentDate.innerHTML += `${convertDate(json.value[i].date).replace(/Thu,|2022|GMT|/g,  '',)} ${json.value[i].value} grader. <br>`;
+        currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
+        currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`
         }
       })
       .catch((err) => {
@@ -103,8 +169,10 @@ const cityBtn = document.querySelectorAll('.cityBtn');
     }
  }
 
-/**
+
+/************************************************************
  * LOGIC
+ * *******************************************************
  */
 
 cityBtn.forEach((btn) => {
