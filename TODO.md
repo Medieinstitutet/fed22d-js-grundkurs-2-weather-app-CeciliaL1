@@ -20,11 +20,25 @@ Conditionals :
 
 Vindhastighet 
 https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/52350/period/latest-day/data.json
-
-
 Nederbördsmängd:
 https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/52350/period/latest-day/data.json
-
 Luftfuktighet:
 https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/52350/period/latest-day/data.json
 
+
+## Göteborg
+vindhastighet
+https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/71420/period/latest-day/data.json
+Nederbörd
+https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/71420/period/latest-day/data.json
+luftfuktighet
+https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/71420/period/latest-day/data.json
+
+
+## Stockholm 
+vindhastighet
+https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/97400/period/latest-day/data.json
+Nederbörd
+https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/97400/period/latest-day/data.json
+luftfuktighet
+https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station//period/latest-day/data.json
