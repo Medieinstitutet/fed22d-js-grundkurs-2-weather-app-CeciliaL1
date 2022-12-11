@@ -2,10 +2,10 @@ import './style/style.scss';
 /**
  * IMPORT FOR WHEN USING LOCAL OBJECTS
  */
-// import { dataCurrentTempMalmo, windMalmo, rainMalmo, moistMalmo } from './currentMalmo';
+import { dataCurrentTempMalmo, windMalmo, rainMalmo, moistMalmo } from './currentMalmo';
 
-// import dataCurrentTempGbg from './currentTempGbg'
-// import dataCurrentTempSth from './currentTempSth' // for when fetching from local object
+import dataCurrentTempGbg from './currentTempGbg'
+import dataCurrentTempSth from './currentTempSth' // for when fetching from local object
 
 
 // IMPORTS FOR CONVERTING DATE & TIME
@@ -47,7 +47,7 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
   * ****************************************************
   */
 
-/*
+
  function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
   currentDate.innerHTML = '';
@@ -97,13 +97,13 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
  }
 }
 
-*/
+
 
 /***********************************************
  * REAL FETCH FROM API 
  * ***********************************************
  */
-
+/*
  
  function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
@@ -204,7 +204,7 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
     }
  }
 
-
+*/
 /************************************************************
  * LOGIC
  * *******************************************************
