@@ -2,11 +2,11 @@ import './style/style.scss';
 /**
  * IMPORT FOR WHEN USING LOCAL OBJECTS
  */
-/*
+
 import { dataCurrentTempMalmo, windMalmo, rainMalmo, moistMalmo } from './currentMalmo';
-import { dataCurrentTempGbg } from './currentGbg';
-import { dataCurrentTempSth } from './currentSth';
-*/
+import { dataCurrentTempGbg, windGbg, rainGbg, moistGbg } from './currentGbg';
+import { dataCurrentTempSth, windSth, rainSth, moistSth } from './currentSth';
+
 // IMPORTS FOR CONVERTING DATE & TIME
 import convertDate from './convertdate';
 import convertTime from './convertTime';
@@ -27,7 +27,7 @@ const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
 /**
  * URL WHEN FETCHING FROM REAL API
  */
-
+/*
 // URL MALMO
 const urlLatestMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/52350/period/latest-day/data.json';
 const urlWindMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/52350/period/latest-day/data.json';
@@ -39,21 +39,22 @@ const urlLatestGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
 const urlWindGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/71420/period/latest-day/data.json';
 const urlRainGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/71420/period/latest-day/data.json';
 const urlMoistGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/71420/period/latest-day/data.json';
+
 // URL STOCKHOLM
 const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97400/period/latest-day/data.json';
-
+const urlWindSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/97400/period/latest-day/data.json';
+const urlRainSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/99280/period/latest-day/data.json';
+const urlMoistSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/97400/period/latest-day/data.json';
+*/
 /*********************************************************
  * FUNCTIONS
  * **********************************************************
  */
 
-
  /*****************************************************
   * For when fetching from local object
   * ****************************************************
   */
-/*
-
  function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
   currentDate.innerHTML = '';
@@ -90,26 +91,33 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
       for (let i = 20; i < 25; i++){
         currentTime.innerHTML += `${convertTime(dataCurrentTempGbg.value[i].date)}<br> `;
         currentTemp.innerHTML += ` ${dataCurrentTempGbg.value[i].value} &#8451<br>`
+        currentWind.innerHTML += `${windGbg.value[i].value}<br>`
+        currentRain.innerHTML += `${rainGbg.value[i].value}<br>`
+        currentMoist.innerHTML += `${moistGbg.value[i].value}<br>`
       }
   }
     else if (_stationNameSth === index){
       station.innerHTML = `Vädret i ${stationNameSth.replace('-Arlanda Flygplats', '')} <br>`;
       currentDate.innerHTML += `${convertDate(dataCurrentTempSth.value[20].date)}<br>  `;
-
+      currentDate.innerHTML += `Info för regn hämtad från Svenska Högarna`
+      
       for (let i = 20; i < 25; i++){
         currentTime.innerHTML += `${convertTime(dataCurrentTempSth.value[i].date)}<br> `;
-        currentTemp.innerHTML += ` ${dataCurrentTempSth.value[i].value} &#8451<br>`
+        currentTemp.innerHTML += ` ${dataCurrentTempSth.value[i].value} &#8451<br>`;
+        currentWind.innerHTML += `${windSth.value[i].value}<br>`
+        currentRain.innerHTML += `${rainSth.value[i].value}<br>`
+        currentMoist.innerHTML += `${moistSth.value[i].value}<br>`
       }
  }
 }
 
-*/
 
 /***********************************************
  * REAL FETCH FROM API 
  * ***********************************************
  */
- function cityfunction(event: any){
+
+ /* function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
   currentDate.innerHTML = '';
   currentTime.innerHTML = '';
@@ -244,7 +252,7 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
       .then((json) => {
         station.innerHTML = `Vädret i ${json.station.name.replace('-Arlanda Flygplats', '')} <br>`;
         currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>  `;
-
+        currentDate.innerHTML += `informationen för regn hämtad från Svenska Högarna`;
         for (let i = 20; i < 25; i++){
           currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
           currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`
@@ -252,11 +260,49 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
       })
       .catch((err) => {
         console.error(err);
-      });
+      })
+      fetch(urlRainSth)
+        .then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          for (let i = 20; i < 25; i++){
+            currentRain.innerHTML += `${json.value[i].value}<br>`
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      
+      fetch(urlWindSth)
+        .then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          for (let i = 20; i < 25; i++){
+            currentWind.innerHTML += `${json.value[i].value}<br>`
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+           
+      fetch(urlMoistSth)
+        .then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          for (let i = 20; i < 25; i++){
+            currentMoist.innerHTML += `${json.value[i].value}<br>`
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
  }
 
-
+*/
 /************************************************************
  * LOGIC
  * *******************************************************
