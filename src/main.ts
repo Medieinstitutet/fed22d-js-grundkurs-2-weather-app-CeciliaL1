@@ -25,7 +25,18 @@ const currentWind = document.querySelector('#currentWind') as HTMLElement;
 const currentRain = document.querySelector('#currentRain') as HTMLElement;
 const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
 
- /*********************************************************
+// URL MALMO
+const urlLatestMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/52350/period/latest-day/data.json';
+const urlWindMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/52350/period/latest-day/data.json';
+const urlRainMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/52350/period/latest-day/data.json';
+const urlMoistMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/52350/period/latest-day/data.json';
+
+// URL GOTHENBURG
+const urlLatestGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/71420/period/latest-day/data.json';
+ 
+// URL STOCKHOLM
+const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97400/period/latest-day/data.json';
+/*********************************************************
  * FUNCTIONS
  * **********************************************************
  */
@@ -102,15 +113,10 @@ const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
   currentWind.innerHTML = '';
   currentRain.innerHTML = '';
   currentMoist.innerHTML = '';
-    
-    const index = event.currentTarget.dataset.id;
+  const index = event.currentTarget.dataset.id;
 
     if (index === 'malmö'){
-        const urlLatest = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/52350/period/latest-day/data.json';
-        const urlWind = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/52350/period/latest-day/data.json';
-        const urlRain = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/52350/period/latest-day/data.json';
-        const urlMoist = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/52350/period/latest-day/data.json';
-        fetch(urlLatest)
+        fetch(urlLatestMalmo)
           .then((res) => {
             return res.json();
           })
@@ -127,7 +133,7 @@ const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
             console.error(err);
           });
 
-      fetch(urlRain)
+      fetch(urlRainMalmo)
         .then((res) => {
           return res.json();
         })
@@ -137,7 +143,7 @@ const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
           }
         })
       
-      fetch(urlWind)
+      fetch(urlWindMalmo)
         .then((res) => {
           return res.json();
         })
@@ -147,7 +153,7 @@ const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
           }
         })
            
-      fetch(urlMoist)
+      fetch(urlMoistMalmo)
         .then((res) => {
           return res.json();
         })
@@ -158,8 +164,7 @@ const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
         })    
     }
    else if (index === 'göteborg'){
-    const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/71420/period/latest-day/data.json';
-    fetch(url)
+    fetch(urlLatestGbg)
       .then((res) => {
         console.log(res);
         return res.json();
@@ -179,8 +184,7 @@ const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
       });
     }
     else if ( index === 'stockholm'){
-        const url = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97400/period/latest-day/data.json';
-    fetch(url)
+    fetch(urlLatestSth)
       .then((res) => {
         console.log(res);
         return res.json();
