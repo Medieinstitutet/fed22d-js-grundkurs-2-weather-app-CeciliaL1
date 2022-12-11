@@ -25,6 +25,10 @@ const currentWind = document.querySelector('#currentWind') as HTMLElement;
 const currentRain = document.querySelector('#currentRain') as HTMLElement;
 const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
 
+/**
+ * URL WHEN FETCHING FROM REAL API
+ */
+/*
 // URL MALMO
 const urlLatestMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/52350/period/latest-day/data.json';
 const urlWindMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/52350/period/latest-day/data.json';
@@ -36,6 +40,7 @@ const urlLatestGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
  
 // URL STOCKHOLM
 const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97400/period/latest-day/data.json';
+*/ 
 /*********************************************************
  * FUNCTIONS
  * **********************************************************
