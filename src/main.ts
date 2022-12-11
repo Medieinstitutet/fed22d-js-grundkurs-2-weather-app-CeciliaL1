@@ -2,12 +2,11 @@ import './style/style.scss';
 /**
  * IMPORT FOR WHEN USING LOCAL OBJECTS
  */
+/*
 import { dataCurrentTempMalmo, windMalmo, rainMalmo, moistMalmo } from './currentMalmo';
-
-import dataCurrentTempGbg from './currentTempGbg'
-import dataCurrentTempSth from './currentTempSth' // for when fetching from local object
-
-
+import { dataCurrentTempGbg } from './currentGbg';
+import { dataCurrentTempSth } from './currentSth';
+*/
 // IMPORTS FOR CONVERTING DATE & TIME
 import convertDate from './convertdate';
 import convertTime from './convertTime';
@@ -28,7 +27,7 @@ const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
 /**
  * URL WHEN FETCHING FROM REAL API
  */
-/*
+
 // URL MALMO
 const urlLatestMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/52350/period/latest-day/data.json';
 const urlWindMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/52350/period/latest-day/data.json';
@@ -37,10 +36,12 @@ const urlMoistMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/
 
 // URL GOTHENBURG
 const urlLatestGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/71420/period/latest-day/data.json';
- 
+const urlWindGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/71420/period/latest-day/data.json';
+const urlRainGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/71420/period/latest-day/data.json';
+const urlMoistGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/71420/period/latest-day/data.json';
 // URL STOCKHOLM
 const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97400/period/latest-day/data.json';
-*/ 
+
 /*********************************************************
  * FUNCTIONS
  * **********************************************************
@@ -51,7 +52,7 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
   * For when fetching from local object
   * ****************************************************
   */
-
+/*
 
  function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
@@ -102,14 +103,12 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
  }
 }
 
-
+*/
 
 /***********************************************
  * REAL FETCH FROM API 
  * ***********************************************
  */
-/*
- 
  function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
   currentDate.innerHTML = '';
@@ -131,7 +130,7 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
 
             for (let i = 20; i < 25; i++){
               currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
-              currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`
+              currentTemp.innerHTML += `${json.value[i].value} &#8451<br>`
             }
           })
           .catch((err) => {
@@ -144,19 +143,25 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
         })
         .then((json) => {
           for (let i = 20; i < 25; i++){
-            currentRain.innerHTML += ` ${json.value[i].value}<br>`
+            currentRain.innerHTML += `${json.value[i].value}<br>`
           }
         })
-      
+        .catch((err) => {
+          console.error(err);
+        });
+        
       fetch(urlWindMalmo)
         .then((res) => {
           return res.json();
         })
         .then((json) => {
           for (let i = 20; i < 25; i++){
-            currentWind.innerHTML += ` ${json.value[i].value}<br>`
+            currentWind.innerHTML += `${json.value[i].value}<br>`
           }
         })
+        .catch((err) => {
+          console.error(err);
+        });
            
       fetch(urlMoistMalmo)
         .then((res) => {
@@ -164,9 +169,12 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
         })
         .then((json) => {
           for (let i = 20; i < 25; i++){
-            currentMoist.innerHTML += ` ${json.value[i].value}<br>`
+            currentMoist.innerHTML += `${json.value[i].value}<br>`
           }
-        })    
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
    else if (index === 'göteborg'){
     fetch(urlLatestGbg)
@@ -175,18 +183,57 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
         return res.json();
       })
       .then((json) => {
-
         station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
         currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>`;
 
          for (let i = 20; i < 25; i++){
             currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
-            currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`
+            currentTemp.innerHTML += `${json.value[i].value} &#8451<br>`
       }
       })
       .catch((err) => {
         console.error(err);
       });
+
+      fetch(urlRainGbg)
+        .then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          for (let i = 20; i < 25; i++){
+            currentRain.innerHTML += `${json.value[i].value}<br>`
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      
+      fetch(urlWindGbg)
+        .then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          for (let i = 20; i < 25; i++){
+            currentWind.innerHTML += `${json.value[i].value}<br>`
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+           
+      fetch(urlMoistGbg)
+        .then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          for (let i = 20; i < 25; i++){
+            currentMoist.innerHTML += `${json.value[i].value}<br>`
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
     }
     else if ( index === 'stockholm'){
     fetch(urlLatestSth)
@@ -209,7 +256,7 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
     }
  }
 
-*/
+
 /************************************************************
  * LOGIC
  * *******************************************************

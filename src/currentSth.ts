@@ -1,8 +1,8 @@
 /**
- * CODE FOR WHEN COPYING WEATHER API TO LOCAL OBJECT STOCKHOLM
+ * CODE FOR WHEN COPYING WEATHER API TO LOCAL OBJECT GOTHENBURG
  */
 
-const dataCurrentTempSth = {
+export const dataCurrentTempSth = {
     value: [
           {
             "date": 1670486400000,
@@ -162,4 +162,22 @@ const dataCurrentTempSth = {
           }
         ],
 }
-export default dataCurrentTempSth;
+  
+/******************************************************
+* MOIST
+*****************************************************
+*/
+  
+  
+/******************************************************
+* RAIN
+*****************************************************
+*/
+  
+ 
+/*****************************************************
+* WIND 
+*****************************************************
+*/
+  
+
