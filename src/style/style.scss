@@ -9,8 +9,10 @@
 main{
   width: 100%;
   min-height: 100vh;
-  background-image: url('sun-bg.jpg');
-  background-position: 50%;
+  background-image: url('day.jpg');
+  background-position: 70%;
+
+
 
   section{
   margin: auto;
@@ -40,5 +42,20 @@ main{
 
   .tempinfo.tempinfook{
     visibility: visible;
+  }
+}
+
+/* WHEN IT IS DUSK */
+main.dusk{
+  background-image: url('dusk.jpg');
+}
+
+/* WHEN ITS NIGHT */
+
+main.night{
+  background-image: url('night.jpg');
+  
+  h1{
+    color: lightgray;
   }
 }

@@ -24,6 +24,17 @@ const currentWind = document.querySelector('#currentWind') as HTMLElement;
 const currentRain = document.querySelector('#currentRain') as HTMLElement;
 const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
 
+const main = document.querySelector('main') as HTMLElement;
+
+// DATES
+const date = new Date();
+const hour: number = date.getHours();
+/*
+const minutes: number = date.getMinutes()
+const actualTime = `${hour}:${minutes}`;
+console.log(actualTime)
+*/
+
 /**
  * URL WHEN FETCHING FROM REAL API
  */
@@ -50,6 +61,20 @@ const urlMoistSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/pa
  * FUNCTIONS
  * **********************************************************
  */
+
+// IF IT IS....
+function conditionals(){
+  // klockan 21 -22 Skymning eller klockan 4-5
+  console.log(hour);
+  if ( hour > 20 && hour < 23 || hour < 6 ){
+    main.classList.add('dusk');
+  }
+  // klockan 23-04 natt
+  if ( hour > 22 || hour === 0 || hour < 4){
+    main.classList.add('night');
+    console.log('natt')
+  }
+}
 
  /*****************************************************
   * For when fetching from local object
@@ -109,6 +134,7 @@ const urlMoistSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/pa
         currentMoist.innerHTML += `${moistSth.value[i].value}<br>`
       }
  }
+
 }
 
 
@@ -312,3 +338,4 @@ cityBtn.forEach((btn) => {
     btn.addEventListener('click', cityfunction);
 })
     
+conditionals();
