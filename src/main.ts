@@ -73,7 +73,7 @@ function conditionals(){
 
 // IF IT IS THIS WEATHER AT THIS TIME.
 // LOCAL OBJECT.
-function conditionalsCurrentTime(){
+function conditionalsCurrentTemp(){
   console.log(dataCurrentTempMalmo.value[24].value)
   const actualTemp = Number(dataCurrentTempMalmo.value[24].value)
   if (actualTemp < 0){
@@ -82,7 +82,7 @@ function conditionalsCurrentTime(){
 }
 //API_fetch
 /*
-function conditionalsCurrentTime(json: any){
+function conditionalsCurrentTemp(json: any){
   console.log(json.value[24].value)
   const actualTemp = Number(json.value[24].value)
   if (actualTemp < 0){
@@ -149,7 +149,7 @@ function conditionalsCurrentTime(json: any){
         currentMoist.innerHTML += `${moistSth.value[i].value}<br>`
       }
  }
-conditionalsCurrentTime();
+conditionalsCurrentTemp();
 }
 
 
@@ -181,7 +181,7 @@ function cityfunction(event: any){
               currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
               currentTemp.innerHTML += `${json.value[i].value} &#8451<br>`
             }
-            conditionalsCurrentTime(json);
+            conditionalsCurrentTemp(json);
           })
           .catch((err) => {
             console.error(err);
@@ -240,7 +240,7 @@ function cityfunction(event: any){
             currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
             currentTemp.innerHTML += `${json.value[i].value} &#8451<br>`
         }
-        conditionalsCurrentTime(json);
+        conditionalsCurrentTemp(json);
       })
       .catch((err) => {
         console.error(err);
@@ -300,7 +300,7 @@ function cityfunction(event: any){
           currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
           currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`
         }
-        conditionalsCurrentTime(json);
+        conditionalsCurrentTemp(json);
       })
       .catch((err) => {
         console.error(err);
