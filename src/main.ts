@@ -1,8 +1,6 @@
 import './style/style.scss';
-/**
- * IMPORT FOR WHEN USING LOCAL OBJECTS
- */
 
+// IMPORT FOR WHEN USING LOCAL OBJECTS
 import { dataCurrentTempMalmo, windMalmo, rainMalmo, moistMalmo } from './currentMalmo';
 import { dataCurrentTempGbg, windGbg, rainGbg, moistGbg } from './currentGbg';
 import { dataCurrentTempSth, windSth, rainSth, moistSth } from './currentSth';
@@ -11,8 +9,9 @@ import { dataCurrentTempSth, windSth, rainSth, moistSth } from './currentSth';
 import convertDate from './convertdate';
 import convertTime from './convertTime';
 
-/**
+/**************************************************
  * DECLARE VARIABLES
+ * ************************************************
  */
 const cityBtn = document.querySelectorAll('.cityBtn');
 const tempInfoDiv = document.querySelector('#tempInfo') as HTMLDivElement;
@@ -29,14 +28,10 @@ const main = document.querySelector('main') as HTMLElement;
 // DATES
 const date = new Date();
 const hour: number = date.getHours();
-/*
-const minutes: number = date.getMinutes()
-const actualTime = `${hour}:${minutes}`;
-console.log(actualTime)
-*/
 
-/**
+/*********************************************
  * URL WHEN FETCHING FROM REAL API
+ * ***********************************************
  */
 /*
 // URL MALMO
@@ -57,15 +52,15 @@ const urlWindSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/par
 const urlRainSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/99280/period/latest-day/data.json';
 const urlMoistSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/97400/period/latest-day/data.json';
 */
+
 /*********************************************************
  * FUNCTIONS
  * **********************************************************
  */
 
-// IF IT IS....
+// IF IT IS DAY/DUSK/NIGHT
 function conditionals(){
   // klockan 21 -22 Skymning eller klockan 4-5
-  console.log(hour);
   if ( hour > 20 && hour < 23 || hour < 6 ){
     main.classList.add('dusk');
   }
@@ -76,11 +71,31 @@ function conditionals(){
   }
 }
 
+// IF IT IS THIS WEATHER AT THIS TIME.
+// LOCAL OBJECT.
+function conditionalsCurrentTime(){
+  console.log(dataCurrentTempMalmo.value[24].value)
+  const actualTemp = Number(dataCurrentTempMalmo.value[24].value)
+  if (actualTemp < 0){
+    main.classList.add('minusdegrees');
+  }
+}
+//API_fetch
+/*
+function conditionalsCurrentTime(json: any){
+  console.log(json.value[24].value)
+  const actualTemp = Number(json.value[24].value)
+  if (actualTemp < 0){
+    main.classList.add('minusdegrees');
+  }
+}
+*/
+
  /*****************************************************
   * For when fetching from local object
   * ****************************************************
   */
- function cityfunction(event: any){
+  function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
   currentDate.innerHTML = '';
   currentTime.innerHTML = '';
@@ -134,7 +149,7 @@ function conditionals(){
         currentMoist.innerHTML += `${moistSth.value[i].value}<br>`
       }
  }
-
+conditionalsCurrentTime();
 }
 
 
@@ -142,8 +157,8 @@ function conditionals(){
  * REAL FETCH FROM API 
  * ***********************************************
  */
-
- /* function cityfunction(event: any){
+/*
+function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
   currentDate.innerHTML = '';
   currentTime.innerHTML = '';
@@ -166,6 +181,7 @@ function conditionals(){
               currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
               currentTemp.innerHTML += `${json.value[i].value} &#8451<br>`
             }
+            conditionalsCurrentTime(json);
           })
           .catch((err) => {
             console.error(err);
@@ -223,7 +239,8 @@ function conditionals(){
          for (let i = 20; i < 25; i++){
             currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
             currentTemp.innerHTML += `${json.value[i].value} &#8451<br>`
-      }
+        }
+        conditionalsCurrentTime(json);
       })
       .catch((err) => {
         console.error(err);
@@ -283,6 +300,7 @@ function conditionals(){
           currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
           currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`
         }
+        conditionalsCurrentTime(json);
       })
       .catch((err) => {
         console.error(err);
@@ -327,7 +345,6 @@ function conditionals(){
         });
     }
  }
-
 */
 /************************************************************
  * LOGIC

@@ -13,9 +13,10 @@ När användaren trycker på respektive stad ska :
         1 timme fram i tiden 
 
 Conditionals :
-    Om det regnar Ska en bild med regn visas
-    Om det är minusgrader Ska en bild med is visas
-    om det blåser mer än ?? ska en bild med vind visas.
+    [x] Om det är ?? på dagen ska denna bild visas
+    [] Om det regnar Ska en bild med regn visas
+    [] Om det är minusgrader Ska en bild med is visas
+    [] Om det blåser mer än ?? ska en bild med vind visas.
 
 
 
