@@ -1,10 +1,11 @@
 import './style/style.scss';
 
 // IMPORT FOR WHEN USING LOCAL OBJECTS
+/*
 import { dataCurrentTempMalmo, windMalmo, rainMalmo, moistMalmo } from './currentMalmo';
 import { dataCurrentTempGbg, windGbg, rainGbg, moistGbg } from './currentGbg';
 import { dataCurrentTempSth, windSth, rainSth, moistSth } from './currentSth';
-
+*/
 // IMPORTS FOR CONVERTING DATE & TIME
 import convertDate from './convertdate';
 import convertTime from './convertTime';
@@ -33,7 +34,6 @@ const hour: number = date.getHours();
  * URL WHEN FETCHING FROM REAL API
  * ***********************************************
  */
-/*
 // URL MALMO
 const urlLatestMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/52350/period/latest-day/data.json';
 const urlWindMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/52350/period/latest-day/data.json';
@@ -51,7 +51,7 @@ const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
 const urlWindSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/97400/period/latest-day/data.json';
 const urlRainSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/99280/period/latest-day/data.json';
 const urlMoistSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/97400/period/latest-day/data.json';
-*/
+
 
 /*********************************************************
  * FUNCTIONS
@@ -71,30 +71,32 @@ function conditionals(){
   }
 }
 
+
 // IF IT IS THIS WEATHER AT THIS TIME.
-// LOCAL OBJECT.
+// LOCAL OBJECT. -  ONLY ON MALMO!!
+/*
 function conditionalsCurrentTemp(){
-  console.log(dataCurrentTempMalmo.value[24].value)
-  const actualTemp = Number(dataCurrentTempMalmo.value[24].value)
-  if (actualTemp < 0){
+  const actualTempMalmo = Number(dataCurrentTempMalmo.value[24].value);
+  if (actualTempMalmo < 0){
     main.classList.add('minusdegrees');
   }
 }
+*/
 //API_fetch
-/*
+
 function conditionalsCurrentTemp(json: any){
-  console.log(json.value[24].value)
   const actualTemp = Number(json.value[24].value)
   if (actualTemp < 0){
     main.classList.add('minusdegrees');
   }
 }
-*/
+
 
  /*****************************************************
   * For when fetching from local object
   * ****************************************************
   */
+ /*
   function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
   currentDate.innerHTML = '';
@@ -123,6 +125,7 @@ function conditionalsCurrentTemp(json: any){
         currentRain.innerHTML += `${rainMalmo.value[i].value}<br>`
         currentMoist.innerHTML += `${moistMalmo.value[i].value}<br>`
       }
+
     }
     else if (_stationNameGbg === index){
       station.innerHTML = `Vädret i ${stationNameGbg.replace(' A', ' ')} <br>`;
@@ -135,6 +138,7 @@ function conditionalsCurrentTemp(json: any){
         currentRain.innerHTML += `${rainGbg.value[i].value}<br>`
         currentMoist.innerHTML += `${moistGbg.value[i].value}<br>`
       }
+
   }
     else if (_stationNameSth === index){
       station.innerHTML = `Vädret i ${stationNameSth.replace('-Arlanda Flygplats', '')} <br>`;
@@ -148,16 +152,17 @@ function conditionalsCurrentTemp(json: any){
         currentRain.innerHTML += `${rainSth.value[i].value}<br>`
         currentMoist.innerHTML += `${moistSth.value[i].value}<br>`
       }
+
  }
-conditionalsCurrentTemp();
+ conditionalsCurrentTemp();
 }
 
-
+*/
 /***********************************************
  * REAL FETCH FROM API 
  * ***********************************************
  */
-/*
+
 function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
   currentDate.innerHTML = '';
@@ -345,7 +350,7 @@ function cityfunction(event: any){
         });
     }
  }
-*/
+
 /************************************************************
  * LOGIC
  * *******************************************************
