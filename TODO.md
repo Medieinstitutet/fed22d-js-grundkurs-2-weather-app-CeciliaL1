@@ -47,3 +47,22 @@ Nederbörd
 https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/97400/period/latest-day/data.json
 luftfuktighet
 https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station//period/latest-day/data.json
+
+## Forecast
+Malmö
+
+https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/13.00073/lat/55.60587/data.json
+
+Göteborg
+https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/11.974560/lat/57.708870/data.json
+
+Stockholm
+https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.063240/lat/59.334591/data.json
+
+Värden :
+timeseries
+
+Temperatur : 10
+fuktighet : 15
+wind : 14
+regn : 4
