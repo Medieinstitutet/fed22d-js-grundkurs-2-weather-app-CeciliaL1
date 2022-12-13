@@ -8,7 +8,7 @@ import { dataCurrentTempSth, windSth, rainSth, moistSth } from './currentSth';
 */
 // IMPORTS FOR CONVERTING DATE & TIME
 import convertDate from './convertdate';
-import convertTime from './convertTime';
+import { convertTime, convertForeCastTime } from './convertTime';
 
 /**************************************************
  * DECLARE VARIABLES
@@ -251,7 +251,7 @@ function cityfunction(event: any){
         .then((json) => {
           console.log(json)
           for (let i = 1; i < 5; i++){
-            console.log(json.timeSeries[i].validTime); // Do a RegEx
+            console.log(convertForeCastTime(json.timeSeries[i].validTime)) // Do a RegEx \d{4}\-\d{2}\-\d{2}\w  - \:\d{2}\w
             foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
           }
         })
