@@ -24,6 +24,12 @@ const currentWind = document.querySelector('#currentWind') as HTMLElement;
 const currentRain = document.querySelector('#currentRain') as HTMLElement;
 const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
 
+const foreCastTime = document.querySelector('#foreCastTime') as HTMLElement;
+const foreCastTemp = document.querySelector('#foreCastTemp') as HTMLElement;
+const foreCastWind = document.querySelector('#foreCastWind') as HTMLElement;
+const foreCastRain = document.querySelector('#foreCastRain') as HTMLElement;
+const foreCastMoist = document.querySelector('#foreCastMoist') as HTMLElement;
+
 const main = document.querySelector('main') as HTMLElement;
 
 // DATES
@@ -39,7 +45,7 @@ const urlLatestMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0
 const urlWindMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/52350/period/latest-day/data.json';
 const urlRainMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/52350/period/latest-day/data.json';
 const urlMoistMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/52350/period/latest-day/data.json';
-
+const urlforeCastMalmo = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/13.00073/lat/55.60587/data.json';
 // URL GOTHENBURG
 const urlLatestGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/71420/period/latest-day/data.json';
 const urlWindGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/71420/period/latest-day/data.json';
@@ -85,7 +91,7 @@ function conditionalsCurrentTemp(){
 //API_fetch
 
 function conditionalsCurrentTemp(json: any){
-  const actualTemp = Number(json.value[24].value)
+  const actualTemp = Number(json.value[23].value)
   if (actualTemp < 0){
     main.classList.add('minusdegrees');
   }
@@ -171,6 +177,13 @@ function cityfunction(event: any){
   currentWind.innerHTML = '';
   currentRain.innerHTML = '';
   currentMoist.innerHTML = '';
+
+  foreCastTime.innerHTML = ''; 
+  foreCastTemp.innerHTML = '';
+  foreCastWind.innerHTML = ''; 
+  foreCastRain.innerHTML = ''; 
+  foreCastMoist.innerHTML = '';
+
   const index = event.currentTarget.dataset.id;
 
     if (index === 'malmö'){
@@ -182,7 +195,7 @@ function cityfunction(event: any){
             station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
             currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>`;
 
-            for (let i = 20; i < 25; i++){
+            for (let i = 20; i < 24; i++){
               currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
               currentTemp.innerHTML += `${json.value[i].value} &#8451<br>`
             }
@@ -197,7 +210,8 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 25; i++){
+          
+          for (let i = 20; i < 24; i++){
             currentRain.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -210,7 +224,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentWind.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -223,13 +237,24 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentMoist.innerHTML += `${json.value[i].value}<br>`
           }
         })
         .catch((err) => {
           console.error(err);
         });
+      fetch(urlforeCastMalmo)
+        .then ((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          console.log(json)
+          for (let i = 1; i < 5; i++){
+            console.log(json.timeSeries[i].validTime); // Do a RegEx
+            foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
+          }
+        })
     }
    else if (index === 'göteborg'){
     fetch(urlLatestGbg)
@@ -241,7 +266,7 @@ function cityfunction(event: any){
         station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
         currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>`;
 
-         for (let i = 20; i < 25; i++){
+         for (let i = 20; i < 24; i++){
             currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
             currentTemp.innerHTML += `${json.value[i].value} &#8451<br>`
         }
@@ -256,7 +281,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentRain.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -269,7 +294,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentWind.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -282,7 +307,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentMoist.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -301,7 +326,7 @@ function cityfunction(event: any){
         station.innerHTML = `Vädret i ${json.station.name.replace('-Arlanda Flygplats', '')} <br>`;
         currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>  `;
         currentDate.innerHTML += `informationen för regn hämtad från Svenska Högarna`;
-        for (let i = 20; i < 25; i++){
+        for (let i = 20; i < 24; i++){
           currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
           currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`
         }
@@ -315,7 +340,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentRain.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -328,7 +353,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentWind.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -341,7 +366,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentMoist.innerHTML += `${json.value[i].value}<br>`
           }
         })
