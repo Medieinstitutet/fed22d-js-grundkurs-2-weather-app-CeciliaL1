@@ -94,6 +94,8 @@ function conditionalsCurrentTemp(json: any){
   const actualTemp = Number(json.value[23].value)
   if (actualTemp < 0){
     main.classList.add('minusdegrees');
+  }else{
+    main.classList.remove('minusdegrees');
   }
 }
 
@@ -195,7 +197,7 @@ function cityfunction(event: any){
             station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
             currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>`;
 
-            for (let i = 20; i < 24; i++){
+            for (let i = 20; i < 25; i++){
               currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
               currentTemp.innerHTML += `${json.value[i].value} &#8451<br>`
             }
@@ -211,7 +213,7 @@ function cityfunction(event: any){
         })
         .then((json) => {
           
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentRain.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -224,7 +226,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentWind.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -237,7 +239,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentMoist.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -266,7 +268,7 @@ function cityfunction(event: any){
         station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
         currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>`;
 
-         for (let i = 20; i < 24; i++){
+         for (let i = 20; i < 25; i++){
             currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
             currentTemp.innerHTML += `${json.value[i].value} &#8451<br>`
         }
@@ -281,7 +283,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentRain.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -294,7 +296,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentWind.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -307,7 +309,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentMoist.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -326,7 +328,7 @@ function cityfunction(event: any){
         station.innerHTML = `Vädret i ${json.station.name.replace('-Arlanda Flygplats', '')} <br>`;
         currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>  `;
         currentDate.innerHTML += `informationen för regn hämtad från Svenska Högarna`;
-        for (let i = 20; i < 24; i++){
+        for (let i = 20; i < 25; i++){
           currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
           currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`
         }
@@ -340,7 +342,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentRain.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -353,7 +355,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentWind.innerHTML += `${json.value[i].value}<br>`
           }
         })
@@ -366,7 +368,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentMoist.innerHTML += `${json.value[i].value}<br>`
           }
         })
