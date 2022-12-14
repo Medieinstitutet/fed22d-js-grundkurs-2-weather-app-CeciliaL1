@@ -10,7 +10,7 @@ När användaren trycker på respektive stad ska :
         [x]Vindhastighet
 
     Temperatur för 
-        1 timme fram i tiden 
+       [x] 4 timmar fram i tiden 
 
 Conditionals :
     [x] Om det är ?? på dagen ska denna bild visas
