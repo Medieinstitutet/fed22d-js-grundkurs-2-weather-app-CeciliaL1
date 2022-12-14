@@ -46,18 +46,20 @@ const urlWindMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/p
 const urlRainMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/52350/period/latest-day/data.json';
 const urlMoistMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/52350/period/latest-day/data.json';
 const urlforeCastMalmo = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/13.00073/lat/55.60587/data.json';
+
 // URL GOTHENBURG
 const urlLatestGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/71420/period/latest-day/data.json';
 const urlWindGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/71420/period/latest-day/data.json';
 const urlRainGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/71420/period/latest-day/data.json';
 const urlMoistGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/71420/period/latest-day/data.json';
+const urlforeCastGbg = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/11.974560/lat/57.708870/data.json';
 
 // URL STOCKHOLM
 const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97400/period/latest-day/data.json';
 const urlWindSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/97400/period/latest-day/data.json';
 const urlRainSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/99280/period/latest-day/data.json';
 const urlMoistSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/97400/period/latest-day/data.json';
-
+const urlforeCastSth = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.063240/lat/59.334591/data.json';
 
 /*********************************************************
  * FUNCTIONS
@@ -253,10 +255,16 @@ function cityfunction(event: any){
         .then((json) => {
           console.log(json)
           for (let i = 1; i < 5; i++){
-            console.log(convertForeCastTime(json.timeSeries[i].validTime)) // Do a RegEx \d{4}\-\d{2}\-\d{2}\w  - \:\d{2}\w
+            foreCastTime.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
             foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
+            foreCastWind.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
+            foreCastRain.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
+            foreCastMoist.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
           }
         })
+        .catch((err) =>{
+          console.log(err);
+        });
     }
    else if (index === 'göteborg'){
     fetch(urlLatestGbg)
@@ -317,6 +325,23 @@ function cityfunction(event: any){
           console.error(err);
         });
 
+      fetch(urlforeCastGbg)
+        .then ((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          for (let i = 1; i < 5; i++){
+            foreCastTime.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
+            foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
+            foreCastWind.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
+            foreCastRain.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
+            foreCastMoist.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
+          }
+        })
+        .catch((err) =>{
+          console.log(err);
+        });
+
     }
     else if ( index === 'stockholm'){
     fetch(urlLatestSth)
@@ -374,6 +399,24 @@ function cityfunction(event: any){
         })
         .catch((err) => {
           console.error(err);
+        });
+
+      fetch(urlforeCastSth)
+        .then ((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          console.log(json)
+          for (let i = 1; i < 5; i++){
+            foreCastTime.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
+            foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
+            foreCastWind.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
+            foreCastRain.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
+            foreCastMoist.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
+          }
+        })
+        .catch((err) =>{
+          console.log(err);
         });
     }
  }
