@@ -2,14 +2,14 @@
 
 Väder för Malmö, göteborg och stockholm ska hämtas.
 När användaren trycker på respektive stad ska :
-    Temperatur för 
+Temperatur för 
         [x]Den senaste timmen visas
         [x]Dem tre senaste timmarna visas
         [x]Nederbörd
         [x]Relativ luftfuktighet
         [x]Vindhastighet
 
-    Temperatur för 
+Temperatur för 
        [x] 4 timmar fram i tiden 
 
 Conditionals :
@@ -17,6 +17,9 @@ Conditionals :
     [] Om det regnar Ska en bild med regn visas
     [] Om det är minusgrader Ska en bild med is visas
     [] Om det blåser mer än ?? ska en bild med vind visas.
+
+Övrigt:
+    [] få rätt på innerHTML vid felhantering
 
 
 
