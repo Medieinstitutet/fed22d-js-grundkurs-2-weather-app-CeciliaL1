@@ -66,21 +66,13 @@ const urlforeCastSth = 'https://opendata-download-metfcst.smhi.se/api/category/p
  * **********************************************************
  */
 
-// IF IT IS DAY/DUSK/NIGHT
-function conditionals(){
-  // klockan 21 -22 Skymning eller klockan 4-5
-  if ( hour > 20 && hour < 23 || hour < 6 ){
-    main.classList.add('dusk');
-  }
-  // klockan 23-04 natt
-  if ( hour > 22 || hour === 0 || hour < 4){
-    main.classList.add('night');
-    console.log('natt')
-  }
-}
 
+ /*****************************************************
+  * For when fetching from local object
+  * ****************************************************
+  */
 
-// IF IT IS THIS WEATHER AT THIS TIME.
+ // IF IT IS THIS WEATHER AT THIS TIME.
 // LOCAL OBJECT. -  ONLY ON MALMO!!
 /*
 function conditionalsCurrentTemp(){
@@ -90,22 +82,7 @@ function conditionalsCurrentTemp(){
   }
 }
 */
-//API_fetch
 
-function conditionalsCurrentTemp(json: any){
-  const actualTemp = Number(json.timeSeries[0].parameters[10].values[0])
-  if (actualTemp < 0){
-    main.classList.add('minusdegrees');
-  }else{
-    main.classList.remove('minusdegrees');
-  }
-}
-
-
- /*****************************************************
-  * For when fetching from local object
-  * ****************************************************
-  */
  /*
   function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
@@ -167,11 +144,40 @@ function conditionalsCurrentTemp(json: any){
  conditionalsCurrentTemp();
 }
 
+
+
+
 */
 /***********************************************
  * REAL FETCH FROM API 
  * ***********************************************
  */
+
+
+// IF IT IS DAY/DUSK/NIGHT
+function conditionals(){
+  // klockan 21 -22 Skymning eller klockan 4-5
+  if ( hour > 20 && hour < 23 || hour < 6 ){
+    main.classList.add('dusk');
+  }
+  // klockan 23-04 natt
+  if ( hour > 22 || hour === 0 || hour < 4){
+    main.classList.add('night');
+    console.log('natt')
+  }
+}
+
+
+function conditionalsCurrentTemp(json: any){
+  const actualTemp = Number(json.timeSeries[0].parameters[10].values[0])
+  if (actualTemp < 0){
+    main.classList.add('minusdegrees');
+  }else{
+    main.classList.remove('minusdegrees');
+  }
+}
+
+
 
 function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
@@ -199,7 +205,7 @@ function cityfunction(event: any){
             station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
             currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>`;
 
-            for (let i = 21; i < 25; i++){
+            for (let i = 20; i < 24; i++){
               currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
               currentTemp.innerHTML += `${json.value[i]?.value} &#8451<br>`
               if (json.value[i]?.value == undefined){
@@ -218,7 +224,7 @@ function cityfunction(event: any){
         })
         .then((json) => {
           
-          for (let i = 21; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentRain.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
               currentRain.innerHTML += `Värdet hittades ej<br>`;
@@ -235,7 +241,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 21; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentWind.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
               currentWind.innerHTML += `Värdet hittades ej<br>`;;
@@ -252,7 +258,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 21; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentMoist.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
               currentMoist.innerHTML += `Värdet hittades ej<br>`;
@@ -384,7 +390,7 @@ function cityfunction(event: any){
         station.innerHTML = `Vädret i ${json.station.name.replace('-Arlanda Flygplats', '')} <br>`;
         currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>  `;
         currentDate.innerHTML += `informationen för regn hämtad från Svenska Högarna`;
-        for (let i = 21; i < 25; i++){
+        for (let i = 20; i < 24; i++){
           currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
           currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`;
           if (json.value[i]?.value === undefined){
@@ -401,7 +407,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 21; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentRain.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
               currentRain.innerHTML += `Värdet hittades ej<br>`;
@@ -418,7 +424,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 21; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentWind.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
               currentWind.innerHTML += `Värdet hittades ej<br>`;
@@ -435,7 +441,7 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 21; i < 25; i++){
+          for (let i = 20; i < 24; i++){
             currentMoist.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
               currentMoist.innerHTML += `Värdet hittades ej<br>`;
