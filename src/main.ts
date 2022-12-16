@@ -163,7 +163,6 @@ function conditionals(){
   // klockan 23-04 natt
   if ( hour > 22 || hour === 0 || hour < 4){
     main.classList.add('night');
-    console.log('natt')
   }
 }
 
