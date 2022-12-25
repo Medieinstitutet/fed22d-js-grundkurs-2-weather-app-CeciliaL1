@@ -15,11 +15,11 @@ Temperatur för
 Conditionals :
     [x] Om det är ?? på dagen ska denna bild visas
     [] Om det regnar Ska en bild med regn visas
-    [] Om det är minusgrader Ska en bild med is visas
+    [x] Om det är minusgrader Ska en bild med is visas
     [] Om det blåser mer än ?? ska en bild med vind visas.
 
 Övrigt:
-    [] få rätt på innerHTML vid felhantering
+    [x] få rätt på innerHTML vid felhantering
 
 
 
