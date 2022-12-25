@@ -5,7 +5,7 @@
     <link rel="icon" type="image/ico" href="/fed22d-js-grundkurs-2-weather-app-CeciliaL1/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Väder App</title>
-    <script type="module" crossorigin src="/fed22d-js-grundkurs-2-weather-app-CeciliaL1/assets/index.2f01bb95.js"></script>
+    <script type="module" crossorigin src="/fed22d-js-grundkurs-2-weather-app-CeciliaL1/assets/index.2e80763c.js"></script>
     <link rel="stylesheet" href="/fed22d-js-grundkurs-2-weather-app-CeciliaL1/assets/index.64e47c9b.css">
   </head>
   <body>
@@ -14,9 +14,9 @@
 
       <section>
         <h1>Väderapp</h1>
-        <button class="cityBtn" data-id="malmö">Malmö</button>
-        <button class="cityBtn" data-id="göteborg">Göteborg</button>
-        <button class="cityBtn" data-id="stockholm">Stockholm</button>
+        <button class="cityBtn" data-id="malmö" aria-label="Malmö">Malmö</button>
+        <button class="cityBtn" data-id="göteborg" aria-label="Göteborg">Göteborg</button>
+        <button class="cityBtn" data-id="stockholm" aria-label="Stockholm">Stockholm</button>
       </section>
       
       <section class="tempinfo" id="tempInfo">
@@ -26,7 +26,7 @@
 
           <table>
             <tr> 
-              <h3>väder bak i tiden</h3> 
+              <h3>Väder bak i tiden</h3> 
               <th>Tid</th>
               <th>Temperatur</th>
               <th>Vind</th>
@@ -39,6 +39,23 @@
             <td><span id="currentRain"></span></td>
             <td><span id="currentMoist"></span></td>
           </table>
+
+          <table>
+            <tr> 
+              <h3>Nuvarande väder</h3> 
+              <th>Tid</th>
+              <th>Temperatur</th>
+              <th>Vind</th>
+              <th>Regn</th>
+              <th>Luftfuktighet</th>
+            </tr>  
+            <td><span id="timeNow"></span></td>
+            <td><span id="tempNow"></span></td>
+            <td><span id="windNow"></span></td>
+            <td><span id="rainNow"></span></td>
+            <td><span id="moistNow"></span></td>
+          </table>
+
           <table>
             <tr> 
               <h3>Väder fram i tiden</h3> 
