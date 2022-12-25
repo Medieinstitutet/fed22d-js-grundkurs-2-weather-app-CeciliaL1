@@ -12,9 +12,9 @@
 
       <section>
         <h1>Väderapp</h1>
-        <button class="cityBtn" data-id="malmö">Malmö</button>
-        <button class="cityBtn" data-id="göteborg">Göteborg</button>
-        <button class="cityBtn" data-id="stockholm">Stockholm</button>
+        <button class="cityBtn" data-id="malmö" aria-label="Malmö">Malmö</button>
+        <button class="cityBtn" data-id="göteborg" aria-label="Göteborg">Göteborg</button>
+        <button class="cityBtn" data-id="stockholm" aria-label="Stockholm">Stockholm</button>
       </section>
       
       <section class="tempinfo" id="tempInfo">
@@ -24,7 +24,7 @@
 
           <table>
             <tr> 
-              <h3>väder bak i tiden</h3> 
+              <h3>Väder bak i tiden</h3> 
               <th>Tid</th>
               <th>Temperatur</th>
               <th>Vind</th>
@@ -37,6 +37,23 @@
             <td><span id="currentRain"></span></td>
             <td><span id="currentMoist"></span></td>
           </table>
+
+          <table>
+            <tr> 
+              <h3>Nuvarande väder</h3> 
+              <th>Tid</th>
+              <th>Temperatur</th>
+              <th>Vind</th>
+              <th>Regn</th>
+              <th>Luftfuktighet</th>
+            </tr>  
+            <td><span id="timeNow"></span></td>
+            <td><span id="tempNow"></span></td>
+            <td><span id="windNow"></span></td>
+            <td><span id="rainNow"></span></td>
+            <td><span id="moistNow"></span></td>
+          </table>
+
           <table>
             <tr> 
               <h3>Väder fram i tiden</h3> 

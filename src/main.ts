@@ -24,6 +24,13 @@ const currentWind = document.querySelector('#currentWind') as HTMLElement;
 const currentRain = document.querySelector('#currentRain') as HTMLElement;
 const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
 
+
+const timeNow = document.querySelector('#timeNow') as HTMLElement;
+const tempNow = document.querySelector('#tempNow') as HTMLElement;
+const windNow = document.querySelector('#windNow') as HTMLElement;
+const rainNow = document.querySelector('#rainNow') as HTMLElement;
+const moistNow = document.querySelector('#moistNow') as HTMLElement;
+
 const foreCastTime = document.querySelector('#foreCastTime') as HTMLElement;
 const foreCastTemp = document.querySelector('#foreCastTemp') as HTMLElement;
 const foreCastWind = document.querySelector('#foreCastWind') as HTMLElement;
@@ -187,6 +194,12 @@ function cityfunction(event: any){
   currentRain.innerHTML = '';
   currentMoist.innerHTML = '';
 
+  timeNow.innerHTML = '';
+  tempNow.innerHTML = '';
+  windNow.innerHTML = '';
+  rainNow.innerHTML = '';
+  moistNow.innerHTML = '';
+
   foreCastTime.innerHTML = ''; 
   foreCastTemp.innerHTML = '';
   foreCastWind.innerHTML = ''; 
@@ -204,11 +217,11 @@ function cityfunction(event: any){
             station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
             currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>`;
 
-            for (let i = 20; i < 24; i++){
+            for (let i = 20; i < 25; i++){
               currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
               currentTemp.innerHTML += `${json.value[i]?.value} &#8451<br>`
               if (json.value[i]?.value == undefined){
-                currentTemp.innerHTML = ' ';
+                currentTemp.innerHTML = currentTemp.innerHTML.replace('undefined', 'värdet hittades ej');
                 console.log('Hittade inte parametern')
               }
             }
@@ -223,10 +236,10 @@ function cityfunction(event: any){
         })
         .then((json) => {
           
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentRain.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
-              currentRain.innerHTML += `Värdet hittades ej<br>`;
+              currentRain.innerHTML = currentRain.innerHTML.replace('undefined', 'värdet hittades ej');
               console.log('Hittade inte parametern');
             }
           }
@@ -240,10 +253,10 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentWind.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
-              currentWind.innerHTML += `Värdet hittades ej<br>`;;
+              currentWind.innerHTML = currentWind.innerHTML.replace('undefined', 'värdet hittades ej');
               console.log('Hittade inte parametern');
             }
           }
@@ -257,10 +270,10 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentMoist.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
-              currentMoist.innerHTML += `Värdet hittades ej<br>`;
+              currentMoist.innerHTML = currentMoist.innerHTML.replace('undefined', 'värdet hittades ej');
               console.log('Hittade inte parametern');
             }
           }
@@ -273,7 +286,15 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 0; i < 5; i++){
+          for (let i = 0; i < 1; i++){
+            timeNow.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
+            tempNow.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
+            windNow.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
+            rainNow.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
+            moistNow.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
+          }
+
+          for (let i = 1; i < 5; i++){
             foreCastTime.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
             foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
             foreCastWind.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
@@ -296,11 +317,11 @@ function cityfunction(event: any){
         station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
         currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>`;
 
-         for (let i = 20; i < 24; i++){
+         for (let i = 20; i < 25; i++){
             currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
             currentTemp.innerHTML += `${json.value[i]?.value} &#8451<br>`;
             if (json.value[i]?.value === undefined){
-              currentTemp.innerHTML += `Värdet hittades ej<br>`;
+              currentTemp.innerHTML = currentTemp.innerHTML.replace('undefined', 'värdet hittades ej');
               console.log('Hittade inte parametern');
             }
         }
@@ -314,10 +335,10 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentRain.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
-              currentRain.innerHTML += `Värdet hittades ej<br>`;
+              currentRain.innerHTML = currentRain.innerHTML.replace('undefined', 'värdet hittades ej');
               console.log('Hittade inte parametern');
             }
           }
@@ -331,10 +352,10 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentWind.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
-              currentWind.innerHTML += `Värdet hittades ej<br>`;
+              currentWind.innerHTML = currentWind.innerHTML.replace('undefined', 'värdet hittades ej');
               console.log('Hittade inte parametern');
             }
           }
@@ -348,10 +369,10 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentMoist.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
-              currentMoist.innerHTML += `Värdet hittades ej<br>`;
+              currentMoist.innerHTML = currentMoist.innerHTML.replace('undefined', 'värdet hittades ej');
               console.log('Hittade inte parametern');
             }
           }
@@ -365,7 +386,14 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 0; i < 5; i++){
+          for (let i = 0; i < 1; i++){
+            timeNow.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
+            tempNow.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
+            windNow.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
+            rainNow.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
+            moistNow.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
+          }
+          for (let i = 1; i < 5; i++){
             foreCastTime.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
             foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
             foreCastWind.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
@@ -389,11 +417,11 @@ function cityfunction(event: any){
         station.innerHTML = `Vädret i ${json.station.name.replace('-Arlanda Flygplats', '')} <br>`;
         currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>  `;
         currentDate.innerHTML += `informationen för regn hämtad från Svenska Högarna`;
-        for (let i = 20; i < 24; i++){
+        for (let i = 20; i < 25; i++){
           currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
           currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`;
           if (json.value[i]?.value === undefined){
-            currentTemp.innerHTML += `Värdet hittades ej<br>`;
+            currentTemp.innerHTML = currentTemp.innerHTML.replace('undefined', 'värdet hittades ej');
             console.log('Hittade inte parametern');
           }
         }
@@ -406,10 +434,10 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentRain.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
-              currentRain.innerHTML += `Värdet hittades ej<br>`;
+              currentRain.innerHTML = currentRain.innerHTML.replace('undefined', 'värdet hittades ej');
               console.log('Hittade inte parametern');
             }
           }
@@ -423,10 +451,10 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentWind.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
-              currentWind.innerHTML += `Värdet hittades ej<br>`;
+              currentWind.innerHTML = currentWind.innerHTML.replace('undefined', 'värdet hittades ej');
               console.log('Hittade inte parametern');
             }
           }
@@ -440,10 +468,10 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 20; i < 24; i++){
+          for (let i = 20; i < 25; i++){
             currentMoist.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
-              currentMoist.innerHTML += `Värdet hittades ej<br>`;
+              currentMoist.innerHTML = currentMoist.innerHTML.replace('undefined', 'värdet hittades ej');
               console.log('Hittade inte parametern');
             }
           }
@@ -457,7 +485,14 @@ function cityfunction(event: any){
           return res.json();
         })
         .then((json) => {
-          for (let i = 0; i < 5; i++){
+          for (let i = 0; i < 1; i++){
+            timeNow.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
+            tempNow.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
+            windNow.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
+            rainNow.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
+            moistNow.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
+          }
+          for (let i =1; i < 5; i++){
             foreCastTime.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
             foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
             foreCastWind.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
