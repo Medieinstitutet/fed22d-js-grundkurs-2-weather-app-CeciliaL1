@@ -10,31 +10,49 @@ main{
   width: 100%;
   min-height: 100vh;
   background-image: url('day.jpg');
+  background-size: cover;
   background-position: 70%;
-
-
 
   section{
   margin: auto;
-  width: 70%;
   text-align: center;
   padding-top: 40px;
 
   button{
     margin-top: 40px;
     cursor: pointer;
-    width: 80px;
+    width: 90px;
+    border: none;
+    height: 40px;
+    margin-bottom: 20px;
+
+    &:hover{
+      border: 2px solid rgb(104 104 104);
+      box-shadow: 0 0 15px rgba(0 0 0 / 70%);
+    }
   }
   }
 
   .tempinfo{
-    width: 100%;
-    height: auto;
+    width: 90%;
     background-color: rgba($color: #fff, $alpha: 70%);
     visibility: hidden;
 
+    .headings{
+      display: flex;
+      justify-content: space-between;
+      margin-left: 50px;
+      margin-right: 50px;
+      padding-bottom: 20px;
+    }
+
     table{
-      margin-left: 40px;
+      margin-left: 100px;
+      margin-bottom: 30px;
+
+      &:nth-of-type(3){
+        padding-bottom: 40px;
+      }
     }
 
   }
