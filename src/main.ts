@@ -1,14 +1,13 @@
 import './style/style.scss';
-
-// IMPORT FOR WHEN USING LOCAL OBJECTS
+import { getWeatherMalmo } from './apiMalmo';
+import { getWeatherGbg } from './apiGbg';
+import { getWeatherSth } from './apiSth';
 /*
+// IMPORT FOR WHEN USING LOCAL OBJECTS
 import { dataCurrentTempMalmo, windMalmo, rainMalmo, moistMalmo } from './currentMalmo';
 import { dataCurrentTempGbg, windGbg, rainGbg, moistGbg } from './currentGbg';
 import { dataCurrentTempSth, windSth, rainSth, moistSth } from './currentSth';
 */
-// IMPORTS FOR CONVERTING DATE & TIME
-import convertDate from './convertdate';
-import { convertTime, convertForeCastTime } from './convertTime';
 
 /**************************************************
  * DECLARE VARIABLES
@@ -16,26 +15,26 @@ import { convertTime, convertForeCastTime } from './convertTime';
  */
 const cityBtn = document.querySelectorAll('.cityBtn');
 const tempInfoDiv = document.querySelector('#tempInfo') as HTMLDivElement;
-const station = document.querySelector('#station') as HTMLElement;
-const currentDate = document.querySelector('#currentDate') as HTMLElement;
-const currentTime = document.querySelector('#currentTime') as HTMLElement;
-const currentTemp = document.querySelector('#currentTemp') as HTMLElement;
-const currentWind = document.querySelector('#currentWind') as HTMLElement;
-const currentRain = document.querySelector('#currentRain') as HTMLElement;
-const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
+export const station = document.querySelector('#station') as HTMLElement;
+export const currentDate = document.querySelector('#currentDate') as HTMLElement;
+export const currentTime = document.querySelector('#currentTime') as HTMLElement;
+export const currentTemp = document.querySelector('#currentTemp') as HTMLElement;
+export const currentWind = document.querySelector('#currentWind') as HTMLElement;
+export const currentRain = document.querySelector('#currentRain') as HTMLElement;
+export const currentMoist = document.querySelector('#currentMoist') as HTMLElement;
 
 
-const timeNow = document.querySelector('#timeNow') as HTMLElement;
-const tempNow = document.querySelector('#tempNow') as HTMLElement;
-const windNow = document.querySelector('#windNow') as HTMLElement;
-const rainNow = document.querySelector('#rainNow') as HTMLElement;
-const moistNow = document.querySelector('#moistNow') as HTMLElement;
+export const timeNow = document.querySelector('#timeNow') as HTMLElement;
+export const tempNow = document.querySelector('#tempNow') as HTMLElement;
+export const windNow = document.querySelector('#windNow') as HTMLElement;
+export const rainNow = document.querySelector('#rainNow') as HTMLElement;
+export const moistNow = document.querySelector('#moistNow') as HTMLElement;
 
-const foreCastTime = document.querySelector('#foreCastTime') as HTMLElement;
-const foreCastTemp = document.querySelector('#foreCastTemp') as HTMLElement;
-const foreCastWind = document.querySelector('#foreCastWind') as HTMLElement;
-const foreCastRain = document.querySelector('#foreCastRain') as HTMLElement;
-const foreCastMoist = document.querySelector('#foreCastMoist') as HTMLElement;
+export const foreCastTime = document.querySelector('#foreCastTime') as HTMLElement;
+export const foreCastTemp = document.querySelector('#foreCastTemp') as HTMLElement;
+export const foreCastWind = document.querySelector('#foreCastWind') as HTMLElement;
+export const foreCastRain = document.querySelector('#foreCastRain') as HTMLElement;
+export const foreCastMoist = document.querySelector('#foreCastMoist') as HTMLElement;
 
 const main = document.querySelector('main') as HTMLElement;
 
@@ -43,30 +42,6 @@ const main = document.querySelector('main') as HTMLElement;
 const date = new Date();
 const hour: number = date.getHours();
 
-/*********************************************
- * URL WHEN FETCHING FROM REAL API
- * ***********************************************
- */
-// URL MALMO
-const urlLatestMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/52350/period/latest-day/data.json';
-const urlWindMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/52350/period/latest-day/data.json';
-const urlRainMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/52350/period/latest-day/data.json';
-const urlMoistMalmo = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/52350/period/latest-day/data.json';
-const urlforeCastMalmo = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/13.00073/lat/55.60587/data.json';
-
-// URL GOTHENBURG
-const urlLatestGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/71420/period/latest-day/data.json';
-const urlWindGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/71420/period/latest-day/data.json';
-const urlRainGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/71420/period/latest-day/data.json';
-const urlMoistGbg = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/71420/period/latest-day/data.json';
-const urlforeCastGbg = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/11.974560/lat/57.708870/data.json';
-
-// URL STOCKHOLM
-const urlLatestSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/1/station/97400/period/latest-day/data.json';
-const urlWindSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/4/station/97400/period/latest-day/data.json';
-const urlRainSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/7/station/99280/period/latest-day/data.json';
-const urlMoistSth = 'https://opendata-download-metobs.smhi.se/api/version/1.0/parameter/6/station/97400/period/latest-day/data.json';
-const urlforeCastSth = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.063240/lat/59.334591/data.json';
 
 /*********************************************************
  * FUNCTIONS
@@ -160,7 +135,6 @@ function conditionalsCurrentTemp(){
  * ***********************************************
  */
 
-
 // IF IT IS DAY/DUSK/NIGHT
 function conditionals(){
   // klockan 21 -22 Skymning eller klockan 4-5
@@ -173,8 +147,7 @@ function conditionals(){
   }
 }
 
-
-function conditionalsCurrentTemp(json: any){
+export function conditionalsCurrentTemp(json: any){
   const actualTemp = Number(json.timeSeries[0].parameters[10].values[0])
   if (actualTemp < 0){
     main.classList.add('minusdegrees');
@@ -182,8 +155,6 @@ function conditionalsCurrentTemp(json: any){
     main.classList.remove('minusdegrees');
   }
 }
-
-
 
 function cityfunction(event: any){
   tempInfoDiv.classList.add('tempinfook');
@@ -209,301 +180,14 @@ function cityfunction(event: any){
   const index = event.currentTarget.dataset.id;
 
     if (index === 'malmö'){
-        fetch(urlLatestMalmo)
-          .then((res) => {
-            return res.json();
-          })
-          .then((json) => {
-            station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
-            currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>`;
-
-            for (let i = 20; i < 25; i++){
-              currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
-              currentTemp.innerHTML += `${json.value[i]?.value} &#8451<br>`
-              if (json.value[i]?.value == undefined){
-                currentTemp.innerHTML = currentTemp.innerHTML.replace('undefined', 'värdet hittades ej');
-                console.log('Hittade inte parametern')
-              }
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-
-      fetch(urlRainMalmo)
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          
-          for (let i = 20; i < 25; i++){
-            currentRain.innerHTML += `${json.value[i]?.value}<br>`;
-            if (json.value[i]?.value === undefined){
-              currentRain.innerHTML = currentRain.innerHTML.replace('undefined', 'värdet hittades ej');
-              console.log('Hittade inte parametern');
-            }
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-        
-      fetch(urlWindMalmo)
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          for (let i = 20; i < 25; i++){
-            currentWind.innerHTML += `${json.value[i]?.value}<br>`;
-            if (json.value[i]?.value === undefined){
-              currentWind.innerHTML = currentWind.innerHTML.replace('undefined', 'värdet hittades ej');
-              console.log('Hittade inte parametern');
-            }
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-           
-      fetch(urlMoistMalmo)
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          for (let i = 20; i < 25; i++){
-            currentMoist.innerHTML += `${json.value[i]?.value}<br>`;
-            if (json.value[i]?.value === undefined){
-              currentMoist.innerHTML = currentMoist.innerHTML.replace('undefined', 'värdet hittades ej');
-              console.log('Hittade inte parametern');
-            }
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-      fetch(urlforeCastMalmo)
-        .then ((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          for (let i = 0; i < 1; i++){
-            timeNow.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
-            tempNow.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
-            windNow.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
-            rainNow.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
-            moistNow.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
-          }
-
-          for (let i = 1; i < 5; i++){
-            foreCastTime.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
-            foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
-            foreCastWind.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
-            foreCastRain.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
-            foreCastMoist.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
-          }
-          conditionalsCurrentTemp(json);
-        })
-        .catch((err) =>{
-          console.log(err);
-        });
+      getWeatherMalmo();
     }
    else if (index === 'göteborg'){
-    fetch(urlLatestGbg)
-      .then((res) => {
-        console.log(res);
-        return res.json();
-      })
-      .then((json) => {
-        station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
-        currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>`;
-
-         for (let i = 20; i < 25; i++){
-            currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
-            currentTemp.innerHTML += `${json.value[i]?.value} &#8451<br>`;
-            if (json.value[i]?.value === undefined){
-              currentTemp.innerHTML = currentTemp.innerHTML.replace('undefined', 'värdet hittades ej');
-              console.log('Hittade inte parametern');
-            }
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
-      fetch(urlRainGbg)
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          for (let i = 20; i < 25; i++){
-            currentRain.innerHTML += `${json.value[i]?.value}<br>`;
-            if (json.value[i]?.value === undefined){
-              currentRain.innerHTML = currentRain.innerHTML.replace('undefined', 'värdet hittades ej');
-              console.log('Hittade inte parametern');
-            }
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-      
-      fetch(urlWindGbg)
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          for (let i = 20; i < 25; i++){
-            currentWind.innerHTML += `${json.value[i]?.value}<br>`;
-            if (json.value[i]?.value === undefined){
-              currentWind.innerHTML = currentWind.innerHTML.replace('undefined', 'värdet hittades ej');
-              console.log('Hittade inte parametern');
-            }
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-           
-      fetch(urlMoistGbg)
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          for (let i = 20; i < 25; i++){
-            currentMoist.innerHTML += `${json.value[i]?.value}<br>`;
-            if (json.value[i]?.value === undefined){
-              currentMoist.innerHTML = currentMoist.innerHTML.replace('undefined', 'värdet hittades ej');
-              console.log('Hittade inte parametern');
-            }
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-
-      fetch(urlforeCastGbg)
-        .then ((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          for (let i = 0; i < 1; i++){
-            timeNow.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
-            tempNow.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
-            windNow.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
-            rainNow.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
-            moistNow.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
-          }
-          for (let i = 1; i < 5; i++){
-            foreCastTime.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
-            foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
-            foreCastWind.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
-            foreCastRain.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
-            foreCastMoist.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
-          }
-          conditionalsCurrentTemp(json);
-        })
-        .catch((err) =>{
-          console.log(err);
-        });
+      getWeatherGbg();
 
     }
     else if ( index === 'stockholm'){
-    fetch(urlLatestSth)
-      .then((res) => {
-        console.log(res);
-        return res.json();
-      })
-      .then((json) => {
-        station.innerHTML = `Vädret i ${json.station.name.replace('-Arlanda Flygplats', '')} <br>`;
-        currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>  `;
-        currentDate.innerHTML += `informationen för regn hämtad från Svenska Högarna`;
-        for (let i = 20; i < 25; i++){
-          currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
-          currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`;
-          if (json.value[i]?.value === undefined){
-            currentTemp.innerHTML = currentTemp.innerHTML.replace('undefined', 'värdet hittades ej');
-            console.log('Hittade inte parametern');
-          }
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      fetch(urlRainSth)
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          for (let i = 20; i < 25; i++){
-            currentRain.innerHTML += `${json.value[i]?.value}<br>`;
-            if (json.value[i]?.value === undefined){
-              currentRain.innerHTML = currentRain.innerHTML.replace('undefined', 'värdet hittades ej');
-              console.log('Hittade inte parametern');
-            }
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-      
-      fetch(urlWindSth)
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          for (let i = 20; i < 25; i++){
-            currentWind.innerHTML += `${json.value[i]?.value}<br>`;
-            if (json.value[i]?.value === undefined){
-              currentWind.innerHTML = currentWind.innerHTML.replace('undefined', 'värdet hittades ej');
-              console.log('Hittade inte parametern');
-            }
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-           
-      fetch(urlMoistSth)
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          for (let i = 20; i < 25; i++){
-            currentMoist.innerHTML += `${json.value[i]?.value}<br>`;
-            if (json.value[i]?.value === undefined){
-              currentMoist.innerHTML = currentMoist.innerHTML.replace('undefined', 'värdet hittades ej');
-              console.log('Hittade inte parametern');
-            }
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-
-      fetch(urlforeCastSth)
-        .then ((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          for (let i = 0; i < 1; i++){
-            timeNow.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
-            tempNow.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
-            windNow.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
-            rainNow.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
-            moistNow.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
-          }
-          for (let i =1; i < 5; i++){
-            foreCastTime.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
-            foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
-            foreCastWind.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
-            foreCastRain.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
-            foreCastMoist.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
-          }
-          conditionalsCurrentTemp(json);
-        })
-        .catch((err) =>{
-          console.log(err);
-        });
+      getWeatherSth();
     }
  }
 
