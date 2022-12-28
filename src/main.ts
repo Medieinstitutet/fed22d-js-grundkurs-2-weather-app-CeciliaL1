@@ -148,11 +148,19 @@ function conditionals(){
 }
 
 export function conditionalsCurrentTemp(json: any){
-  const actualTemp = Number(json.timeSeries[0].parameters[10].values[0])
+  const actualTemp = Number(json.timeSeries[0].parameters[10].values[0]);
+  const actualRain = Number(json.timeSeries[0].parameters[4].values[0]);
+  console.log(actualRain);
   if (actualTemp < 0){
     main.classList.add('minusdegrees');
-  }else{
+  }
+  else if(actualTemp > 0 && actualRain < 0){
+    main.classList.add('rain');
+
+  }
+  else{
     main.classList.remove('minusdegrees');
+    main.classList.remove('rain');
   }
 }
 

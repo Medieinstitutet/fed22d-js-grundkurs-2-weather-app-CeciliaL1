@@ -24,7 +24,6 @@ export function getWeatherSth(){
       .then((json) => {
         station.innerHTML = `Vädret i ${json.station.name.replace('-Arlanda Flygplats', '')} <br>`;
         currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>  `;
-        currentDate.innerHTML += `informationen för regn hämtad från Svenska Högarna`;
         for (let i = 20; i < 25; i++){
           currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
           currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`;
