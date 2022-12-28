@@ -20,6 +20,7 @@ main{
 
   h1{
     text-align: center;
+    font-size: 2rem;
   }
 
   button{
@@ -39,7 +40,7 @@ main{
 
   .tempinfo{
     width: 600px;
-    background-color: rgba($color: #fff, $alpha: 70%);
+    background-color: rgba($color: #fff, $alpha: 80%);
     visibility: hidden;
     padding-bottom: 30px;
 
@@ -67,6 +68,17 @@ main{
     }
 
     }
+    
+@media only screen and (max-width: 550px) {
+  .tempinfo{
+    width: 350px;
+    
+    .valuesection{
+      width: 350px;
+    }
+  }
+
+}
   }
 
   .tempinfo.tempinfook{
@@ -95,8 +107,14 @@ main.night{
 
 main.minusdegrees{
   background-image: url('minusdegrees.jpg');
+
+  h1{
+    color: lightgray;
+  }
 }
 
 main.rain{
   background-image: url('rain.jpg');
+
 }
+

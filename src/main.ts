@@ -2,6 +2,7 @@ import './style/style.scss';
 import { getWeatherMalmo } from './apiMalmo';
 import { getWeatherGbg } from './apiGbg';
 import { getWeatherSth } from './apiSth';
+
 /*
 // IMPORT FOR WHEN USING LOCAL OBJECTS
 import { dataCurrentTempMalmo, windMalmo, rainMalmo, moistMalmo } from './currentMalmo';
