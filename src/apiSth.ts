@@ -29,7 +29,7 @@ export function getWeatherSth(){
           currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
           currentTemp.innerHTML += ` ${json.value[i].value} &#8451<br>`;
           if (json.value[i]?.value === undefined){
-            currentTemp.innerHTML = currentTemp.innerHTML.replace('undefined', 'värdet hittades ej');
+            currentTemp.innerHTML = currentTemp.innerHTML.replace('undefined', 'hittades ej');
             console.log('Hittade inte parametern');
           }
         }
@@ -45,7 +45,7 @@ export function getWeatherSth(){
           for (let i = 20; i < 25; i++){
             currentRain.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
-              currentRain.innerHTML = currentRain.innerHTML.replace('undefined', 'värdet hittades ej');
+              currentRain.innerHTML = currentRain.innerHTML.replace('undefined', 'hittades ej');
               console.log('Hittade inte parametern');
             }
           }
@@ -62,7 +62,7 @@ export function getWeatherSth(){
           for (let i = 20; i < 25; i++){
             currentWind.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
-              currentWind.innerHTML = currentWind.innerHTML.replace('undefined', 'värdet hittades ej');
+              currentWind.innerHTML = currentWind.innerHTML.replace('undefined', 'hittades ej');
               console.log('Hittade inte parametern');
             }
           }
@@ -79,7 +79,7 @@ export function getWeatherSth(){
           for (let i = 20; i < 25; i++){
             currentMoist.innerHTML += `${json.value[i]?.value}<br>`;
             if (json.value[i]?.value === undefined){
-              currentMoist.innerHTML = currentMoist.innerHTML.replace('undefined', 'värdet hittades ej');
+              currentMoist.innerHTML = currentMoist.innerHTML.replace('undefined', 'hittades ej');
               console.log('Hittade inte parametern');
             }
           }

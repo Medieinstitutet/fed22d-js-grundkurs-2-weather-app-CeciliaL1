@@ -15,8 +15,12 @@ main{
 
   section{
   margin: auto;
-  text-align: center;
+  width: 300px;
   padding-top: 40px;
+
+  h1{
+    text-align: center;
+  }
 
   button{
     margin-top: 40px;
@@ -34,34 +38,41 @@ main{
   }
 
   .tempinfo{
-    width: 90%;
+    width: 600px;
     background-color: rgba($color: #fff, $alpha: 70%);
     visibility: hidden;
+    padding-bottom: 30px;
 
     .headings{
       display: flex;
-      justify-content: space-between;
-      margin-left: 50px;
-      margin-right: 50px;
+      justify-content: space-around;
       padding-bottom: 20px;
     }
 
-    table{
-      margin-left: 100px;
-      margin-bottom: 30px;
-
-      &:nth-of-type(3){
-        padding-bottom: 40px;
+    .valuesection{
+      margin: auto;
+      margin-bottom: 10px;
+      width: 400px;
+      text-align: center;
+      padding: 10px;
+      padding-left: 40px;
+      
+      &:nth-of-type(2){
+        background-color: rgba($color: rgb(122 120 120), $alpha: 70%);
+        border-radius: 50px;
+        padding: 20px;
+        padding-left: 40px;
       }
+
     }
 
+    }
   }
-  
 
   .tempinfo.tempinfook{
     visibility: visible;
   }
-}
+
 
 /* WHEN IT IS DUSK */
 main.dusk{
