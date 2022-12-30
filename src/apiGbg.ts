@@ -23,7 +23,7 @@ export function getWeatherGbg() {
       station.innerHTML = `Vädret i ${json.station.name.replace(' A', ' ')} <br>`;
       currentDate.innerHTML += `${convertDate(json.value[20].date)}<br>`;
 
-       for (let i = 20; i < 25; i++){
+       for (let i = 20; i < 24; i++){
           currentTime.innerHTML += `${convertTime(json.value[i].date)}<br> `;
           currentTemp.innerHTML += `${json.value[i]?.value} &#8451<br>`;
           if (json.value[i]?.value === undefined){
@@ -41,7 +41,7 @@ export function getWeatherGbg() {
         return res.json();
       })
       .then((json) => {
-        for (let i = 20; i < 25; i++){
+        for (let i = 20; i < 24; i++){
           currentRain.innerHTML += `${json.value[i]?.value}<br>`;
           if (json.value[i]?.value === undefined){
             currentRain.innerHTML = currentRain.innerHTML.replace('undefined', 'null');
@@ -58,7 +58,7 @@ export function getWeatherGbg() {
         return res.json();
       })
       .then((json) => {
-        for (let i = 20; i < 25; i++){
+        for (let i = 20; i < 24; i++){
           currentWind.innerHTML += `${json.value[i]?.value}<br>`;
           if (json.value[i]?.value === undefined){
             currentWind.innerHTML = currentWind.innerHTML.replace('undefined', 'null');
@@ -75,7 +75,7 @@ export function getWeatherGbg() {
         return res.json();
       })
       .then((json) => {
-        for (let i = 20; i < 25; i++){
+        for (let i = 20; i < 24; i++){
           currentMoist.innerHTML += `${json.value[i]?.value}<br>`;
           if (json.value[i]?.value === undefined){
             currentMoist.innerHTML = currentMoist.innerHTML.replace('undefined', 'null');
