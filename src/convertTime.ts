@@ -4,10 +4,20 @@
 
 export function convertTime(timestamp: any) {
   const time = (new Date(timestamp)).toTimeString();
-  // matchar sträng : :00 GMT+0100 (centraleuropeisk normaltid)
-  const regex = new RegExp(/\:\d{2}\ \w{3}\+\d{4}\ \(\w{16}\ \w{9}\)/g);
-  const _time = time.replace(regex, ' ');
+
+  if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    const regexMatchMobile = new RegExp(/\:\d{2}\ \w{3}\+\d{4}\ \(\w{16}\ \w{3}\)/g);
+    const _time = time.replace(regexMatchMobile, ' ');
+    return _time;
+  }else{
+  // matchar sträng : 15:00:00 GMT+0100 (centraleuropeisk normaltid)
+  const regexMatchDeskt = new RegExp(/\:\d{2}\ \w{3}\+\d{4}\ \(\w{16}\ \w{9}\)/g);
+  const _time = time.replace(regexMatchDeskt, ' ');
   return _time;
+  }
+  
+
+
 }
 
 /**
