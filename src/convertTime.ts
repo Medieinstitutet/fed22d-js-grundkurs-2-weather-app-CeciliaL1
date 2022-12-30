@@ -4,14 +4,13 @@
 
 export function convertTime(timestamp: any) {
   const time = (new Date(timestamp)).toTimeString();
-
   // If user is on mobile
   if(/webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     // match string : 15:00:00 GMT+0100 (CET)
     const regexMatch = new RegExp(/\:\d{2}\ \w{3}\+\d{4}\ \(\w{3}\)/g);
     const _time = time.replace(regexMatch, ' ');
     return _time;
-  }else if (/Android|huawei/i.test(navigator.userAgent)){
+  }else if (/Android|huawei|iPhone 12/i.test(navigator.userAgent)){
     const regexMatch = new RegExp(/\:\d{2}\ \w{3}\+\d{4}\ \(\w{16}\ \w{9}\)/g);
     const _time = time.replace(regexMatch, ' ');
     return _time;
