@@ -4,7 +4,10 @@
 
 export function convertTime(timestamp: any) {
   const time = (new Date(timestamp)).toTimeString();
-  return time.replace(':00 GMT+0100 (centraleuropeisk normaltid)', ' ');
+  // matchar sträng : :00 GMT+0100 (centraleuropeisk normaltid)
+  const regex = new RegExp(/\:\d{2}\ \w{3}\+\d{4}\ \(\w{16}\ \w{9}\)/g);
+  const _time = time.replace(regex, ' ');
+  return _time;
 }
 
 /**
