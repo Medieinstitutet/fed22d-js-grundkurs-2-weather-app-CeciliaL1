@@ -1,3 +1,7 @@
+# Förbättringar
+
+När vi får ut timestamp från Api;et ifrån cädret bak i tiden så f¨r vi i olika userAgents ut olika strängar vilket gör det svårt att regexa ut allting, akulle behövas mer finlir för att kunna matcha olika strängar på olika devices. just nu regexar den ut på mobil och på desktop men på vissa mobiler får den ut en annan sträng än vad som är regexat på så skulle behövt Skriva nytt regExp för dem olika strängarna.
+
 ## pseudo-Kod
 
 Väder för Malmö, göteborg och stockholm ska hämtas.
