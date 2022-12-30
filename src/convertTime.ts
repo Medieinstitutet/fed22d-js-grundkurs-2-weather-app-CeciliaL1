@@ -6,7 +6,7 @@ export function convertTime(timestamp: any) {
   const time = (new Date(timestamp)).toTimeString();
 
   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-    const regexMatchMobile = new RegExp(/\:\d{2}\ \w{3}\+\d{4}\ \(\w{16}\ \w{3}\)/g);
+    const regexMatchMobile = new RegExp(/\:\d{2}\ \w{3}\+\d{4}\ \(\w{3}\)/g);
     const _time = time.replace(regexMatchMobile, ' ');
     return _time;
   }else{
