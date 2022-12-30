@@ -99,7 +99,7 @@ export function getWeatherSth(){
             rainNow.innerHTML += `${json.timeSeries[i].parameters[4].values[0]}<br>`
             moistNow.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
           }
-          for (let i =1; i < 5; i++){
+          for (let i = 1; i < 5; i++){
             foreCastTime.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
             foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
             foreCastWind.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
