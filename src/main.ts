@@ -138,11 +138,11 @@ function conditionalsCurrentTemp(){
 
 // IF IT IS DAY/DUSK/NIGHT
 function conditionals(){
-  // klockan 21 -22 Skymning eller klockan 4-5
+  // if time is 21 -22  or time is 4-5, it's dusk
   if ( hour > 20 && hour < 23 || hour < 6 ){
     main.classList.add('dusk');
   }
-  // klockan 23-04 natt
+  // if time is 23-4 , it's night
   if ( hour > 22 || hour === 0 || hour < 4){
     main.classList.add('night');
   }
