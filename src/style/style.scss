@@ -1,64 +1,121 @@
 @use "utils/a11y"; // Om det inte funkar, byt @use mot @import
 @use "vendor/reset";
 
-:root {
-  // TODO: Går bra att radera kod även här!
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: rem(16px);
-  line-height: 24px;
-  font-weight: 400;
-  color-scheme: light dark;
-  color: rgb(255 255 255 / 87%);
-  background-color: #242424;
-  font-synthesis: none;
-  text-rendering: optimizelegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-size-adjust: 100%;
+*{
+  margin: 0;
+  box-sizing: border-box;
 }
 
-// TODO: Radera mig! Jag är bara ett exempel.
-main {
-  padding: 20px;
-}
+main{
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('/day.jpg');
+  background-size: cover;
+  background-position: 70%;
 
-.app {
-  margin-block: 20px;
-  display: flex;
-  gap: 20px;
-  justify-content: space-around;
+  section{
+  margin: auto;
+  width: 300px;
+  padding-top: 40px;
 
-  .card {
-    $card-size: 250px;
-
-    width: 0.6413 * $card-size;
-    height: $card-size;
-    cursor: pointer;
-    background: #102a3f;
-    border-radius: 8px;
-    display: flex;
-    font-weight: bold;
-    align-items: center;
-    justify-content: space-around;
+  h1{
     text-align: center;
-    box-shadow: 5px 5px 5px rgb(0 0 0 / 20%);
+    font-size: 2rem;
+  }
 
-    .front {
-      font-size: rem(50px);
-    }
+  button{
+    margin-top: 40px;
+    cursor: pointer;
+    width: 90px;
+    border: none;
+    height: 40px;
+    margin-bottom: 20px;
+    color: black;
 
-    .back {
-      display: none;
-    }
-
-    &.visible {
-      .front {
-        display: none;
-      }
-
-      .back {
-        display: block;
-      }
+    &:hover{
+      border: 2px solid rgb(104 104 104);
+      box-shadow: 0 0 15px rgba(0 0 0 / 70%);
     }
   }
+  }
+
+  .tempinfo{
+    width: 600px;
+    background-color: rgba($color: #fff, $alpha: 80%);
+    visibility: hidden;
+    padding-bottom: 30px;
+
+    .headings{
+      display: flex;
+      justify-content: space-around;
+      padding-bottom: 20px;
+    }
+
+    .valuesection{
+      margin: auto;
+      margin-bottom: 10px;
+      width: 400px;
+      text-align: center;
+      padding: 10px;
+      padding-left: 40px;
+      
+      &:nth-of-type(2){
+        background-color: rgba($color: rgb(122 120 120), $alpha: 70%);
+        border-radius: 50px;
+        padding: 20px;
+        padding-left: 40px;
+      }
+
+    }
+
+    }
+    
+@media only screen and (max-width: 550px) {
+  .tempinfo{
+    width: 350px;
+    
+    .valuesection{
+      width: 350px;
+    }
+  }
+
 }
+  }
+
+  .tempinfo.tempinfook{
+    visibility: visible;
+  }
+
+
+/* WHEN IT IS DUSK */
+main.dusk{
+  background-image: url('/dusk.jpg');
+  
+  h1{
+    color: lightgray;
+  }
+}
+
+/* WHEN ITS NIGHT */
+
+main.night{
+  background-image: url('/night.jpg');
+  
+  h1{
+    color: lightgray;
+  }
+}
+
+main.minusdegrees{
+  background-image: url('/minusdegrees.jpg');
+
+  h1{
+    color: lightgray;
+  }
+}
+
+main.rain{
+  background-image: url('/rain.jpg');
+
+}
+

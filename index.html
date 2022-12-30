@@ -1,22 +1,87 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- TODO: glöm ej att byta språk här -->
+<html lang="sv">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/ico" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projekt</title>
+    <meta name="description" content="Väderapp som hämtar dåvarande, nuvarande och framtida parametrar för Malmö, Göteborg och Stockholm.">
+    <meta name="author" content="fiktiv väderapp">
+    <title>Väder App</title>
   </head>
   <body>
+  
     <main>
-      <div class="app" id="app"></div> <!-- TODO: går bra att radera -->
-      <!-- TODO: skriv din kod här, innan script-taggen -->
-    </main>
 
-    <!-- TODO
-    - Validera HTML (kopiera den renderade HTML-koden): https://validator.w3.org/#validate_by_input
-    - Kontrollera tillgänglighet: https://www.a11yproject.com/checklist/ & Chrome Lighthouse/Firefox Accessibility Tools
-    - Validera genererade CSS: https://jigsaw.w3.org/css-validator/#validate_by_input
-    -->
+      <section>
+        <h1>Kolla vädret</h1>
+        <button class="cityBtn" data-id="malmö" aria-label="Malmö">Malmö</button>
+        <button class="cityBtn" data-id="göteborg" aria-label="Göteborg">Göteborg</button>
+        <button class="cityBtn" data-id="stockholm" aria-label="Stockholm">Stockholm</button>
+      </section>
+      
+      <section class="tempinfo" id="tempInfo">
+        <div class="headings">
+          <h2 id="station"></h2>
+          <h3 class="date" id="currentDate"></h3>
+        </div>
+        <div class="values">
+          <div class="valuesection">
+            <h4>Väder bak i tiden</h4> 
+            <table>
+              <tr> 
+                <th>Tid</th>
+                <th>Temperatur</th>
+                <th>Vind</th>
+                <th>Regn</th>
+                <th>Luftfuktighet</th>
+              </tr>  
+              <td><span id="currentTime"></span></td>
+              <td><span id="currentTemp"></span></td>
+              <td><span id="currentWind"></span></td>
+              <td><span id="currentRain"></span></td>
+              <td><span id="currentMoist"></span></td>
+            </table>
+          </div>
+
+        <div class="valuesection">
+          <table>
+            <h4>Nuvarande väder</h4> 
+            <tr> 
+              <th>Tid</th>
+              <th>Temperatur</th>
+              <th>Vind</th>
+              <th>Regn</th>
+              <th>Luftfuktighet</th>
+            </tr>  
+            <td><span id="timeNow"></span></td>
+            <td><span id="tempNow"></span></td>
+            <td><span id="windNow"></span></td>
+            <td><span id="rainNow"></span></td>
+            <td><span id="moistNow"></span></td>
+          </table>
+        </div>  
+
+        <div class="valuesection">
+          <table>
+            <tr> 
+              <h4>Väder fram i tiden</h4> 
+              <th>Tid</th>
+              <th>Temperatur</th>
+              <th>Vind</th>
+              <th>Regn</th>
+              <th>Luftfuktighet</th>
+            </tr>  
+            <td><span id="foreCastTime"></span></td>
+            <td><span id="foreCastTemp"></span></td>
+            <td><span id="foreCastWind"></span></td>
+            <td><span id="foreCastRain"></span></td>
+            <td><span id="foreCastMoist"></span></td>
+          </table>
+        </div>
+        </div>
+    </section>
+  
+  </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
