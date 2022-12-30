@@ -90,7 +90,7 @@ fetch(urlforeCastMalmo)
 return res.json();
 })
 .then((json) => {
-for (let i = 1; i < 2; i++){
+for (let i = 0; i < 1; i++){
   timeNow.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
   tempNow.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
   windNow.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
@@ -98,7 +98,7 @@ for (let i = 1; i < 2; i++){
   moistNow.innerHTML += `${json.timeSeries[i].parameters[15].values[0]}<br>`
 }
 
-for (let i = 2; i < 6; i++){
+for (let i = 1; i < 5; i++){
   foreCastTime.innerHTML += `${convertForeCastTime(json.timeSeries[i].validTime)}<br>`
   foreCastTemp.innerHTML += `${json.timeSeries[i].parameters[10].values[0]}<br>`
   foreCastWind.innerHTML += `${json.timeSeries[i].parameters[14].values[0]}<br>`
