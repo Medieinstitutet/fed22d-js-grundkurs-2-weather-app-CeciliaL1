@@ -10,11 +10,16 @@ export function convertTime(timestamp: any) {
     const regexMatch = new RegExp(/\:\d{2}\ \w{3}\+\d{4}\ \(\w{3}\)/g);
     const _time = time.replace(regexMatch, ' ');
     return _time;
-  }else if (/Android|huawei|iPhone 12/i.test(navigator.userAgent)){
+  }else if (/Android|huawei|iPhone/i.test(navigator.userAgent)){
     const regexMatch = new RegExp(/\:\d{2}\ \w{3}\+\d{4}\ \(\w{16}\ \w{9}\)/g);
     const _time = time.replace(regexMatch, ' ');
     return _time;
-  }else{
+  }else if (/Android|huawei/i.test(navigator.userAgent)){
+    const regexMatch = new RegExp(/\:\d{2}\ \w{3}\+\d{4}\ \(\w{7}\ \w{8}\ \w{8}\ \w{4}\)/g);
+    const _time = time.replace(regexMatch, ' ');
+    return _time;
+  }
+  else{
   // match string: 15:00:00 GMT+0100 (centraleuropeisk normaltid)
   const regexMatch = new RegExp(/\:\d{2}\ \w{3}\+\d{4}\ \(\w{16}\ \w{9}\)/g);
   const _time = time.replace(regexMatch, ' ');
